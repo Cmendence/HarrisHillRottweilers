@@ -13,7 +13,7 @@ import Application from './components/Application'
 
 export default function App() {
    return (
-      <>
+      <div className='bg-slate-300 h-screen w-screen'>
       
          <Navbar />
       <Routes>
@@ -27,6 +27,6 @@ export default function App() {
          <Route path='/application' element={<Application />} />
       </Routes>
    
-      </>
+      </div>
    )
  }
