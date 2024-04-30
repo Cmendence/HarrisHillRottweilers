@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import './src/App.css'
-import { Routes, Route } from 'react-router-dom'
+import './App.css'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home"
 import Navbar from './components/Navbar'
 import Males from './components/Males'
@@ -13,6 +13,7 @@ import Application from './components/Application'
 
 export default function App() {
    return (
+   <Router>
       <div className='bg-slate-300 h-screen w-screen'>
       
          <Navbar />
@@ -28,5 +29,6 @@ export default function App() {
       </Routes>
    
       </div>
+      </Router>
    )
  }
