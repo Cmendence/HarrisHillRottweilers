@@ -1,14 +1,14 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home"
-import Navbar from './components/Navbar'
-import Males from './components/Males'
-import Females from './components/Females'
-import Puppies from './components/Puppies'
-import PastLitters from './components/PastLitters'
-import Gallery from './components/Gallery'
-import Contact from './components/Contact'
-import Application from './components/Application'
+import Home from "./components/Home.jsx"
+import Navbar from './components/Navbar.jsx'
+import Males from './components/Males.jsx'
+import Females from './components/Females.jsx'
+import Puppies from './components/Puppies.jsx'
+import PastLitters from './components/PastLitters.jsx'
+import Gallery from './components/Gallery.jsx'
+import Contact from './components/Contact.jsx'
+import Application from './components/Application.jsx'
 
 export default function App() {
    return (
