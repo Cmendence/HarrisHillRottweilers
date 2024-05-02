@@ -9,11 +9,12 @@ import PastLitters from './components/PastLitters.jsx'
 import Gallery from './components/Gallery.jsx'
 import Contact from './components/Contact.jsx'
 import Application from './components/Application.jsx'
+import Footer from './components/Footer.jsx';
 
 export default function App() {
    return (
    <Router>
-      <div className='bg-slate-300 h-screen w-screen'>
+      <div className='bg-slate-300 min-h-screen min-w-screen'>
       
          <Navbar />
       <Routes>
@@ -26,7 +27,7 @@ export default function App() {
          <Route path='/contact' element={<Contact />} />
          <Route path='/application' element={<Application />} />
       </Routes>
-   
+   <Footer />
       </div>
       </Router>
    )
