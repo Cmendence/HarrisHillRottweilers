@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../assets/logo.svg";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Home", href: "/", current: false },
   { name: "Males", href: "/males", current: false },
   { name: "Females", href: "/females", current: false },
   { name: "Puppies", href: "/puppies", current: false },
@@ -18,7 +18,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Navbar() {
+ const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
     <Disclosure as="nav" className="bg-gray-950">
       {({ open }) => (
@@ -54,8 +56,8 @@ export default function Example() {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                            : "text-gray-300 hover:bg-gray-800 ",
+                          "rounded-md px-3 py-2 text-sm font-medium hover:text-yellow-400 active:text-yellow-600"
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
@@ -65,6 +67,7 @@ export default function Example() {
                   </div>
                 </div>
               </div>
+              { isLoggedIn && 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
@@ -76,7 +79,7 @@ export default function Example() {
                 </button>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+           <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
@@ -141,6 +144,7 @@ export default function Example() {
                   </Transition>
                 </Menu>
               </div>
+                }
             </div>
           </div>
 
