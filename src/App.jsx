@@ -10,6 +10,7 @@ import Gallery from './components/Gallery.jsx'
 import Contact from './components/Contact.jsx'
 import Application from './components/Application.jsx'
 import Footer from './components/Footer.jsx';
+import About from './components/About.jsx';
 
 export default function App() {
    return (
@@ -26,6 +27,7 @@ export default function App() {
          <Route path='/gallery' element={<Gallery />} />
          <Route path='/contact' element={<Contact />} />
          <Route path='/application' element={<Application />} />
+         <Route path='/about' element={<About />} />
       </Routes>
    <Footer />
       </div>

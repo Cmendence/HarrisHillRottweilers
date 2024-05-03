@@ -7,7 +7,7 @@ export default function Males() {
 
 
    return(
-      <div className='flex justify-center lg:my-4 flex-wrap lg:mx-8'>
+      <div className='flex justify-center flex-wrap lg:m-8 my-8'>
          {dogs.map( dog => (
          <DogCard 
             key={dog.name}
