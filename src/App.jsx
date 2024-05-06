@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home.jsx"
@@ -12,13 +13,26 @@ import Application from './components/Application.jsx'
 import Footer from './components/Footer.jsx';
 import About from './components/About.jsx';
 import Licenses from './components/Licenses.jsx';
+import Login from './components/Login.jsx';
 
 export default function App() {
+
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+   function toggleLogin(e) {
+      e.preventDefault();
+      console.log('isloggedIn value: ' + isLoggedIn)
+      setIsLoggedIn(prevLoggedIn => !prevLoggedIn);
+    }
+
    return (
    <Router>
-      <div className='bg-gray-300 min-h-screen min-w-screen'>
+      <div className='bg-stone-300 min-h-screen min-w-screen'>
       
-         <Navbar />
+         <Navbar
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            toggleLogin={toggleLogin} />
       <Routes>
          <Route path='/' element={<Home />} />
          <Route path='/males' element={<Males />} />
@@ -29,6 +43,13 @@ export default function App() {
          <Route path='/contact' element={<Contact />} />
          <Route path='/application' element={<Application />} />
          <Route path='/about' element={<About />} />
+         <Route path='/login' element={
+            <Login
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            toggleLogin={toggleLogin}
+                   />} />
+
       </Routes>
       <Licenses />
    <Footer />

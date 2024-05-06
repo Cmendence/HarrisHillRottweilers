@@ -1,5 +1,14 @@
+import Odysseus from '../assets/images/Odysseus.jpg'
+ 
 
- export const dogs = [
+export const dogs = [
+   {name: "Odysseus of Torma Hosue",
+   gender: "Male",
+   age: "3 months",
+   image: Odysseus ,
+   certs: "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+   tags: " Male, Sold",
+   },
    {name: "Barky",
    gender: "Male",
    age: "3 months",
