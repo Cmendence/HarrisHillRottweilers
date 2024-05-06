@@ -11,11 +11,12 @@ import Contact from './components/Contact.jsx'
 import Application from './components/Application.jsx'
 import Footer from './components/Footer.jsx';
 import About from './components/About.jsx';
+import Licenses from './components/Licenses.jsx';
 
 export default function App() {
    return (
    <Router>
-      <div className='bg-slate-300 min-h-screen min-w-screen'>
+      <div className='bg-gray-300 min-h-screen min-w-screen'>
       
          <Navbar />
       <Routes>
@@ -29,6 +30,7 @@ export default function App() {
          <Route path='/application' element={<Application />} />
          <Route path='/about' element={<About />} />
       </Routes>
+      <Licenses />
    <Footer />
       </div>
       </Router>
