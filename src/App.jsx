@@ -14,6 +14,7 @@ import Footer from './components/Footer.jsx';
 import About from './components/About.jsx';
 import Licenses from './components/Licenses.jsx';
 import Login from './components/Login.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
 export default function App() {
 
@@ -43,6 +44,7 @@ export default function App() {
          <Route path='/contact' element={<Contact />} />
          <Route path='/application' element={<Application />} />
          <Route path='/about' element={<About />} />
+         <Route path='/dashboard' element={<Dashboard />} />
          <Route path='/login' element={
             <Login
             isLoggedIn={isLoggedIn}

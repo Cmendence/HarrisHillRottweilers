@@ -23,7 +23,7 @@ export default function Application() {
        
           <button
             type="submit"
-            className="bg-rose-900 rounded border-4 border-rose-900 text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
+            className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
           >
             Submit
           </button>
