@@ -23,7 +23,7 @@ function classNames(...classes) {
 export default function Navbar({ isLoggedIn, toggleLogin }) {
   return (
     <Disclosure as="nav" className="bg-gray-950">
-      {({ open }) => (
+      {({ open, close }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
@@ -53,6 +53,7 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
                       <Link
                         key={item.name}
                         to={item.href}
+                        onClick={() => { close(); }}
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -116,7 +117,7 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <Link
                               href="#"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
@@ -124,12 +125,12 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
                               )}
                             >
                               Settings
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <Link
                               href="#"
                               onClick={toggleLogin}
                               className={classNames(
@@ -138,7 +139,7 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
                               )}
                             >
                               Sign out
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -159,10 +160,11 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <Link
                   key={item.name}
-                  as="a"
+                  to={item.href}
                   href={item.href}
+                  onClick={() => { close(); }}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -172,7 +174,7 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </Link>
               ))}
             </div>
           </Disclosure.Panel>

@@ -10,23 +10,131 @@ export default function Application() {
         Application for companionship
       </h1>
       <p className="text-lg font-semibold text-center">
-         If you&apos;re here, you must have found your next furry family member! Drop us a line and we&apos;ll be in touch soon.
-
+        If you&apos;re here, you must have found your next furry family member!
+        Drop us a line and we&apos;ll be in touch soon.
       </p>
       <div className=" flex justify-center lg-m-4">
-        <form className="border-gray-800 bg-gray-800 border-4 lg:p-8 p-3 rounded-md m-10 lg-w-1/2 text-center font-semibold shadow-lg shadow-gray-600 flex flex-col items-center">
-          <input type="text" placeholder="First Name" name="firstName" className="m-2 lg:pr-14 pr-14 px-1 py-2 rounded-md focus:outline-rose-800" required/>
-          <input type="text" placeholder="Last Name" name="lastName" className="m-2 lg:pr-14 pr-14 px-1 py-2 rounded-md focus:outline-rose-800" required/>
-          <input type="email" placeholder="Email" name="email" className="m-2 lg:pr-14 pr-14 px-1 py-2 rounded-md focus:outline-rose-800" required />
-          <PhoneInput className="number m-2" country={"us"} />
-          <textarea type="text" placeholder="Anything to add?" name="comments" className="m-2 lg:pr-20 pr-20 px-1 py-2 rounded-md focus:outline-rose-800" />
-       
+        <form className="border-gray-800 bg-gray-800 border-4 lg:p-8 p-4 rounded-md m-10 lg:w-1/2 font-semibold shadow-lg shadow-gray-600">
+          <div className="lg:flex justify-center">
+            <div className="flex flex-col">
+              <label htmlFor="firstName" className="text-gray-300 ml-2">
+                First Name <span className="text-rose-600">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Tom"
+                name="firstName"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="lastName" className="text-gray-300 ml-2">
+                Last Name <span className="text-rose-600">*</span>
+              </label>
+
+              <input
+                type="text"
+                placeholder="Brady"
+                name="lastName"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                required
+              />
+            </div>
+          </div>
+          <div className="lg:flex justify-center">
+            <div className="flex flex-col">
+              <label htmlFor="email" className="text-gray-300 ml-2">
+                Email <span className="text-rose-600">*</span>
+              </label>
+
+              <input
+                type="email"
+                placeholder="BradyGaga@gmail.com"
+                name="email"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="Phone" className="text-gray-300 ml-2">
+                Phone <span className="text-rose-600">*</span>
+              </label>
+
+              <PhoneInput className="number m-2" country={"us"} />
+              {/* <textarea type="text" placeholder="Anything to add?" name="comments" className="m-2 lg:pr-20 pr-20 px-1 py-2 rounded-md focus:outline-rose-800" /> */}
+            </div>
+          </div>
+          <div>
+          <div className=" flex flex-col">
+          
+          <label htmlFor="Address" className="text-gray-300 ml-2">
+           Street Address <span className="text-rose-600">*</span>
+          </label>
+
+          <input
+            type="address"
+            placeholder="123 Fake St."
+            name="address"
+            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+            required
+          />
+          </div>
+          <div className=" flex flex-col">
+          <label htmlFor="Address" className="text-gray-300 ml-2">
+            Street Address Line 2
+          </label>
+
+          <input
+            type="address"
+            placeholder="Studio 54"
+            name="address"
+            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+            
+          />
+          </div>
+          </div>
+          {/* <label htmlFor="Address" className="text-gray-300 ml-2">
+            Address <span className="text-rose-600">*</span>
+          </label>
+
+          <input
+            type="address"
+            placeholder="123 Fake St."
+            name="address"
+            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+            required
+          /> */}
+          {/* <label htmlFor="Address" className="text-gray-300 ml-2">
+            Address <span className="text-rose-600">*</span>
+          </label>
+
+          <input
+            type="address"
+            placeholder="123 Fake St."
+            name="address"
+            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+            required
+          />
+          <label htmlFor="Address" className="text-gray-300 ml-2">
+            Address <span className="text-rose-600">*</span>
+          </label>
+
+          <input
+            type="address"
+            placeholder="123 Fake St."
+            name="address"
+            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+            required
+          /> */}
+<div className="flex justify-center">
           <button
             type="submit"
             className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
           >
             Submit
           </button>
+          </div>
         </form>
       </div>
       <div className="text-sm text-gray-600 text-center pb-10">

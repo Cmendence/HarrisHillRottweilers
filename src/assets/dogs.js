@@ -2,7 +2,7 @@ import Odysseus from '../assets/images/Odysseus.jpg'
  
 
 export const dogs = [
-   {name: "Odysseus of Torma Hosue",
+   {name: "Odysseus of Torma House",
    gender: "Male",
    age: "3 months",
    image: Odysseus ,
