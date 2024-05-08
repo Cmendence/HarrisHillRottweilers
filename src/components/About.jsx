@@ -24,12 +24,13 @@ export default function About() {
           dogs with top bloodlines and great socialization.
         </p>
         <p className="font-semibold text-gray-600 mb-6">
-          What sets us apart from other breeders is the care and time we put into our pups. We whelp the pups
-          in our home; they never see a garage or basement. They live in our
-          living quarters from birth until they find their forever home. We also take the time
-          at 3 weeks to start their potty training/kennel training. If we can
-          build a solid base in our puppies early development, it is easier
-          for the forever families to build a sturdy home atop that foundation.
+          What sets us apart from other breeders is the care and time we put
+          into our pups. We whelp the pups in our home; they never see a garage
+          or basement. They live in our living quarters from birth until they
+          find their forever home. We also take the time at 3 weeks to start
+          their potty training/kennel training. If we can build a solid base in
+          our puppies early development, it is easier for the forever families
+          to build a sturdy home atop that foundation.
         </p>
       </div>
     </div>

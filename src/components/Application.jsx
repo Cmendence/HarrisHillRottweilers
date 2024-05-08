@@ -1,4 +1,3 @@
-import React from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
@@ -24,7 +23,7 @@ export default function Application() {
                 type="text"
                 placeholder="Tom"
                 name="firstName"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
                 required
               />
             </div>
@@ -37,7 +36,7 @@ export default function Application() {
                 type="text"
                 placeholder="Brady"
                 name="lastName"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
                 required
               />
             </div>
@@ -52,7 +51,7 @@ export default function Application() {
                 type="email"
                 placeholder="BradyGaga@gmail.com"
                 name="email"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
                 required
               />
             </div>
@@ -62,38 +61,79 @@ export default function Application() {
               </label>
 
               <PhoneInput className="number m-2" country={"us"} />
-              {/* <textarea type="text" placeholder="Anything to add?" name="comments" className="m-2 lg:pr-20 pr-20 px-1 py-2 rounded-md focus:outline-rose-800" /> */}
             </div>
           </div>
-          <div>
-          <div className=" flex flex-col">
-          
-          <label htmlFor="Address" className="text-gray-300 ml-2">
-           Street Address <span className="text-rose-600">*</span>
-          </label>
+          <div className="lg:mx-10 flex justify-center flex-col">
+            <div className=" flex flex-col">
+              <label htmlFor="Address" className="text-gray-300 ml-2">
+                Street Address <span className="text-rose-600">*</span>
+              </label>
 
-          <input
-            type="address"
-            placeholder="123 Fake St."
-            name="address"
-            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
-            required
-          />
-          </div>
-          <div className=" flex flex-col">
-          <label htmlFor="Address" className="text-gray-300 ml-2">
-            Street Address Line 2
-          </label>
+              <input
+                type="address"
+                placeholder="123 Fake St."
+                name="address"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                required
+              />
+            </div>
+            <div className=" flex flex-col">
+              <label htmlFor="Address" className="text-gray-300 ml-2">
+                Street Address Line 2
+              </label>
 
-          <input
-            type="address"
-            placeholder="Studio 54"
-            name="address"
-            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
-            
-          />
+              <input
+                type="address"
+                placeholder="Studio 54"
+                name="address"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+              />
+            </div>
           </div>
+
+          <div className="lg:flex justify-center">
+            <div className="flex flex-col lg:w-1/3">
+              <label htmlFor="city" className="text-gray-300 ml-2">
+                City <span className="text-rose-600">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Albuquerque"
+                name="city"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
+                required
+              />
+            </div>
+            <div className="flex flex-col lg:w-1/5">
+              <label htmlFor="state" className="text-gray-300 ml-2">
+                State <span className="text-rose-600">*</span>
+              </label>
+
+              <input
+                type="text"
+                placeholder="NM"
+                name="state"
+                maxLength={2}
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 uppercase"
+                required
+              />
+            </div>
+            <div className="flex flex-col lg:w-1/3">
+              <label htmlFor="zipcode" className="text-gray-300 ml-2">
+                Postal / Zip Code <span className="text-rose-600">*</span>
+              </label>
+
+              <input
+                type="text"
+                placeholder="90210"
+                name="zip"
+                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                maxLength={5}
+                required
+              />
+            </div>
           </div>
+
           {/* <label htmlFor="Address" className="text-gray-300 ml-2">
             Address <span className="text-rose-600">*</span>
           </label>
@@ -127,13 +167,13 @@ export default function Application() {
             className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
             required
           /> */}
-<div className="flex justify-center">
-          <button
-            type="submit"
-            className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
-          >
-            Submit
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
