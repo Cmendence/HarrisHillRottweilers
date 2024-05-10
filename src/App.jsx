@@ -16,15 +16,17 @@ import Licenses from "./components/Licenses.jsx";
 import Login from "./components/Login.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import DogDetails from "./components/DogDetails.jsx";
+import { dogs } from "./assets/dogs.js";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [selectedDog, setSelectedDog] = useState(null);
 
-  const handleDogClick = (dogId) => {
-    setSelectedDog(dogId);
-    console.log(selectedDog);
+  const handleDogClick = (dog) => {
+    localStorage.setItem("selectedDog", JSON.stringify(dog));
+    JSON.parse(localStorage.getItem("selectedDog"));
+    window.scrollTo(0, 0);
   };
+  
 
   function toggleLogin(e) {
     e.preventDefault();
@@ -44,14 +46,19 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/males"
-            element={<Males handleDogClick={handleDogClick} />}
+            element={
+              <Males
+                handleDogClick={handleDogClick}
+                dogs={dogs}
+              />
+            }
           />
           <Route path="/females" element={<Females />} />
           <Route path="/puppies" element={<Puppies />} />
           <Route path="/pastLitters" element={<PastLitters />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/application" element={<Application />} />
+          <Route path="/application" element={<Application dogs={dogs}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route

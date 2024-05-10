@@ -1,7 +1,17 @@
+import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-export default function Application() {
+export default function Application({dogs}) {
+
+const [selectedDogObj, setSelectedDogObj] = useState(null)
+
+const handleSelectChange = (e) => {
+   const selectedDogName = e.target.value;
+   const selectedDog = dogs.find((dog) => dog.name === selectedDogName);
+   setSelectedDogObj(selectedDog);
+};
+
   return (
     <div className="lg:m-12 mt-4">
       <h1 className="text-4xl text-gray-800 capitalize font-bold text-center mb-4">
@@ -14,6 +24,7 @@ export default function Application() {
       </p>
       <div className=" flex justify-center lg-m-4">
         <form className="border-gray-800 bg-gray-800 border-4 lg:p-8 p-4 rounded-md m-10 lg:w-1/2 font-semibold shadow-lg shadow-gray-600">
+          
           <div className="lg:flex justify-center">
             <div className="flex flex-col">
               <label htmlFor="firstName" className="text-gray-300 ml-2">
@@ -133,7 +144,24 @@ export default function Application() {
               />
             </div>
           </div>
-
+          <div className=" flex justify-center">
+            <div className=" flex flex-col lg:w-2/3">
+            <label htmlFor="dogSelect" className="text-gray-300 mx-0 my-2 ">Dog&apos;s Name<span className="text-rose-600">*</span></label>
+            <select id="dogSelect"  value={selectedDogObj ? selectedDogObj.name : ''} className="rounded-md indent-1 px-1 py-2 focus:outline-rose-800" onChange={handleSelectChange}>
+                <option value="">Select a companion...</option>
+                {dogs.map((dog) => (
+                    <option key={dog.id} value={dog.name} className="font-semibold checked:bg-rose-800 checked:text-gray-100">
+                        {dog.name}
+                    </option>
+                ))}
+            </select>
+            {selectedDogObj &&       <img
+                  src={selectedDogObj.image}
+                  alt={selectedDogObj.name}
+                  className="mt-4 lg:ml-20 ml-10 rounded-lg lg:w-48 w-32 shadow-lg shadow-black"
+                />}
+            </div>
+        </div>
           {/* <label htmlFor="Address" className="text-gray-300 ml-2">
             Address <span className="text-rose-600">*</span>
           </label>
