@@ -22,7 +22,8 @@ export default function DogCard({ dog, handleDogClick }) {
           </div>
         </Link>
 
-        <h2 className="font-semibold lg:text-xl text-md mt-1 text-gray-800">
+        <hr className="border-1 border-rose-900 mx-8" />
+
           {dog.name}
         </h2>
       </div>

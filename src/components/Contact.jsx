@@ -30,7 +30,7 @@ export default function Contact() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
       />
     </svg>
   );
@@ -58,47 +58,52 @@ export default function Contact() {
   );
 
   return (
-    <div className="font-semibold text-gray-700 lg:tracking-wide mx-4">
-      <div className="text-center">
-        <h1 className="text-4xl text-gray-800 mt-10 mb-6">
+    <div className="font-semibold text-gray-700">
+      <div className="tracking-wide text-center mx-4">
+        <h1 className="text-4xl text-gray-800 mt-8 mb-6">
           {" "}
           We want to hear from you!
         </h1>
-        <h2 className="text-xl mb-4">You have questions; we have answers.</h2>
+        <h2 className="lg:text-xl text-lg mb-4">
+          You have questions; we have answers.
+        </h2>
         <p className="mb-4">
           At Harris Hill Rottweilers, we take great pride in our work. If for
           any reason you need to get a hold of us, we want you to know we are
           here to help.
         </p>
-        <div className="flex justify-evenly m-4">
-          <div className="">
-            <p className="flex items-center">
-              Call us &nbsp;
-              <span className="bg-yellow-400 rounded-full p-1.5 border border-gray-700">
-                {phoneIcon}
-              </span>
-            </p>
-            <p>401-256-1442</p>
-          </div>
-          <div>
-            <p className="flex items-center">
-              Email &nbsp;
-              <span className="bg-yellow-400 rounded-full p-1.5 border border-gray-700">
-                {emailIcon}
-              </span>
-            </p>
-            <p>Harrishillrottweilers@yahoo.com</p>
-          </div>
-          <div>
-            <p className="flex items-center">
-            Harris Hill Rottweilers LLC &nbsp;
-              <span className="bg-yellow-400 rounded-full p-1.5 border border-gray-700">
-                {locationPin}
-              </span>
-            </p>
-            <p>4969 Post Rd</p> 
-               <p>Charlestown, RI 02813</p>
-          </div>
+      </div>
+      <div className="mx-8 mb-6 lg:flex lg:justify-evenly">
+        <div>
+          <h2 className="flex items-center">
+            <span className="rounded-full border border-gray-700 bg-yellow-400 p-2">
+              {phoneIcon}
+            </span>{" "}
+            &nbsp; Call
+          </h2>
+          <p className="mb-2 ml-12">401-256-1442</p>
+        </div>
+        <hr className="border-1 border-rose-800 mb-2 lg:hidden" />
+        <div>
+          <h2 className="flex items-center">
+            <span className="rounded-full border border-gray-700 bg-yellow-400 p-2">
+              {emailIcon}
+            </span>{" "}
+            &nbsp; Email
+          </h2>
+          <p className="mb-2 ml-12">Harrishillrottweilers@yahoo.com</p>
+        </div>
+        <hr className="border-1 border-rose-800 mb-2 lg:hidden" />
+
+        <div>
+          <h2 className="flex items-center">
+            <span className="rounded-full border border-gray-700 bg-yellow-400 p-2">
+              {locationPin}
+            </span>{" "}
+            &nbsp; Harris Hill Rottweilers LLC
+          </h2>
+          <p className="ml-12">4969 Post Rd</p>
+          <p className="ml-12">Charlestown, RI 02813</p>
         </div>
       </div>
     </div>

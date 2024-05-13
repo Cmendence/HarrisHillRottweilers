@@ -38,10 +38,12 @@ export default function DogDetails() {
           />
           {isReserved && <ReservedBanner />}
         </div>
-        <div className="flex justify-center font-semibold">
+        <div className="flex justify-center font-semibold ">
           <p className="m-2">Age: {selectedDog.age}</p>
           <p className="m-2 ">Gender: {selectedDog.gender}</p>
         </div>
+        <hr className="border-1 border-rose-900 mx-8 my-4" />
+
         <div className=" relative flex">
           {selectedDog.certs.map((cert, index) => (
             <div
