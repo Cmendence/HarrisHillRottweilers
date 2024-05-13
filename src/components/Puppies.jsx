@@ -1,8 +1,21 @@
-import React from 'react'
+import React from "react";
+import DogCard from "./DogCard";
 
+export default function Females({ handleDogClick, dogs}) {
 
-export default function Puppies() {
-   return(
-      <h1 className='text-4xl text-fuchsia-500 underline font-extrabold text-center'> THIS IS THE PUPPIES PAGE</h1>
-   )
+   const puppies = dogs.filter((dog) => dog.tags.includes("Puppy"));
+
+  return (
+    <div className="flex justify-center flex-wrap lg:m-8 my-8">
+      {puppies.map((dog) => (
+        <DogCard
+          id={dog.id}
+          key={dog.id}
+          dog={dog}
+          handleDogClick={handleDogClick}
+        
+        />
+      ))}
+    </div>
+  );
 }

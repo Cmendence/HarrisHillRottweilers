@@ -10,11 +10,6 @@ export default function DogDetails() {
    const getDogFromLS = localStorage.getItem("selectedDog");
    const selectedDog = JSON.parse(getDogFromLS);
 
-   const goBack = () => {
-      navigate(`/males`);
-      window.scrollTo(0, 0);
-    };
-
 const toggleEnlargeImage = (index) => {
    setEnlargedImageIndex(enlargedImageIndex === index ? null : index);
 }
@@ -32,7 +27,7 @@ const toggleEnlargeImage = (index) => {
 
       <div className=''>
          <button
-              onClick={goBack}
+              onClick={() => navigate(-1)}
               className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
             >
               Back

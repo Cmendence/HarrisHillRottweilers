@@ -26,7 +26,6 @@ export default function App() {
     JSON.parse(localStorage.getItem("selectedDog"));
     window.scrollTo(0, 0);
   };
-  
 
   function toggleLogin(e) {
     e.preventDefault();
@@ -46,19 +45,20 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/males"
-            element={
-              <Males
-                handleDogClick={handleDogClick}
-                dogs={dogs}
-              />
-            }
+            element={<Males handleDogClick={handleDogClick} dogs={dogs} />}
           />
-          <Route path="/females" element={<Females />} />
-          <Route path="/puppies" element={<Puppies />} />
+          <Route
+            path="/females"
+            element={<Females handleDogClick={handleDogClick} dogs={dogs} />}
+          />
+          <Route
+            path="/puppies"
+            element={<Puppies handleDogClick={handleDogClick} dogs={dogs} />}
+          />
           <Route path="/pastLitters" element={<PastLitters />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/application" element={<Application dogs={dogs}/>} />
+          <Route path="/application" element={<Application dogs={dogs} />} />
           <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route

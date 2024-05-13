@@ -3,9 +3,14 @@ import React from "react";
 import DogCard from "./DogCard";
 
 export default function Males({ handleDogClick, dogs}) {
+
+   const maleDogs = dogs.filter((dog) => dog.tags.includes("Male"));
+
   return (
+  <div>
+   <h1 className="border-4 border-pink-500 text-center text-3xl font-semibold text-gray-800 my-4">Our Males</h1>
     <div className="flex justify-center flex-wrap lg:m-8 my-8">
-      {dogs.map((dog) => (
+      {maleDogs.map((dog) => (
         <DogCard
           id={dog.id}
           key={dog.id}
@@ -14,6 +19,7 @@ export default function Males({ handleDogClick, dogs}) {
         
         />
       ))}
+    </div>
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import Odysseus from "../assets/images/Odysseus.jpg";
+import OddyDNA from "../assets/images/oddy-dna.jpg";
+import OddyHDED from "../assets/images/oddy-hd-ed.jpg";
 
 export const dogs = [
   {
@@ -9,12 +11,20 @@ export const dogs = [
     image: Odysseus,
     certs: [
       {
-        name: "DNA Profile",
+         name: "DNA",
+         image: OddyDNA
+       },
+      {
+         name: "HD/ED",
+         image:OddyHDED
+       },
+      {
+        name: "Other2",
         image:
           "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
       {
-        name: "HD/ED",
+        name: "Other",
         image:
           "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
