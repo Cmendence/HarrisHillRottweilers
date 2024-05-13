@@ -25,7 +25,7 @@ export default function DogDetails() {
         Back
       </button>
       <div className=" text-center">
-        <h1 className="font-semibold text-gray-800 text-3xl mb-4">
+        <h1 className="font-semibold text-gray-800 lg:text-3xl text-2xl mb-4 mx-4">
           {selectedDog.name}
         </h1>
         <div className="flex justify-center mx-8 my-2 relative">
@@ -43,21 +43,23 @@ export default function DogDetails() {
           <p className="m-2 ">Gender: {selectedDog.gender}</p>
         </div>
         <hr className="border-1 border-rose-900 mx-8 my-4" />
-
+        <h2 className="lg:text-2xl text-xl font-semibold text-gray-800 tracking-wide"> Certifications</h2>
+        <p className="text-xs text-gray-700 mb-2 tracking-tighter">Click an image to enlarge</p>
         <div className=" relative flex">
           {selectedDog.certs.map((cert, index) => (
             <div
               key={index}
-              className={`mx-6 flex items-center flex-col ${
+              className={`mx-4 flex items-center flex-col ${
                 enlargedImageIndex === index
                   ? "absolute lg:inset-x-72 bottom-0 lg:w-1/2 object-contain z-50 text-yellow-400"
                   : "lg:w-1/5 w-1/4"
               }`}
             >
-              <h2 className="font-semibold lg:text-xl">{cert.name}</h2>
+               
+              <h2 className="font-semibold lg:text-base text-xs">{cert.name}</h2>
               <img
                 src={cert.image}
-                className={` rounded-md m-4 `}
+                className={` rounded-md lg:my-4 my-2 `}
                 alt={`certifications for ${selectedDog.name}`}
                 onClick={() => toggleEnlargeImage(index)}
               />
