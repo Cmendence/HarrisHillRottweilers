@@ -29,7 +29,7 @@ export const dogs = [
           "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
     ],
-    tags: " Male, Sold",
+    tags: ["Male", "Unavailable"],
   },
   {
     name: "Barky",
@@ -50,7 +50,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: " Male, Sold",
+    tags: ["Male", "Sold"],
   },
   {
     name: "Belle",
@@ -71,7 +71,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Female",
+    tags: ["Puppy", "Female" , "Available",]
   },
   {
     name: "Snoopy",
@@ -92,7 +92,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Male",
+       tags: [ "Male" , ]
   },
   {
     name: "Squeaker",
@@ -113,7 +113,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Female",
+       tags: ["Puppy", "Female" , "Available",]
   },
   {
     name: "Ruff",
@@ -134,7 +134,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Male",
+       tags: ["Puppy", "Male" , "Available",]
   },
   {
     name: "Pete",
@@ -155,7 +155,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: " Male, Sold",
+       tags: ["Puppy", "Male" , "Reserved",]
   },
   {
     name: "Annie",
@@ -176,7 +176,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Female",
+       tags: ["Puppy", "Female" , "Available",]
   },
   {
     name: "Scrap",
@@ -197,7 +197,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Male",
+       tags: [ "Male" ]
   },
   {
     name: "Puffer",
@@ -218,7 +218,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Female",
+       tags: ["Puppy", "Female" , "Available",]
   },
   {
     name: "Wrangler",
@@ -239,7 +239,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Male",
+       tags: ["Puppy", "Male" , "Available",]
   },
   {
     name: "Boog",
@@ -260,7 +260,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: " Male, Sold",
+       tags: ["Male" , "Reserved",]
   },
   {
     name: "Cutie",
@@ -281,7 +281,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Female",
+       tags: ["Puppy", "Female" , "Reserved",]
   },
   {
     name: "Pork",
@@ -302,7 +302,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Male",
+       tags: ["Male" ]
   },
   {
     name: "Rai",
@@ -323,7 +323,7 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Female",
+       tags: ["Puppy", "Female" , "Reserved",]
   },
   {
     name: "Buster",
@@ -344,6 +344,6 @@ export const dogs = [
              "https://images.unsplash.com/photo-1584445584400-1a7cc5de77ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
          },
        ],
-    tags: "Puppy, Male",
+       tags: ["Puppy", "Male" , "Available",]
   },
 ];

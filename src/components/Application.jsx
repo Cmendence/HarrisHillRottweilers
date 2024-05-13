@@ -6,9 +6,11 @@ export default function Application({dogs}) {
 
 const [selectedDogObj, setSelectedDogObj] = useState(null)
 
+const availableDogs = dogs.filter((dog) => dog.tags.includes("Available"));
+
 const handleSelectChange = (e) => {
    const selectedDogName = e.target.value;
-   const selectedDog = dogs.find((dog) => dog.name === selectedDogName);
+   const selectedDog = availableDogs.find((dog) => dog.name === selectedDogName);
    setSelectedDogObj(selectedDog);
 };
 
@@ -149,7 +151,7 @@ const handleSelectChange = (e) => {
             <label htmlFor="dogSelect" className="text-gray-300 mx-0 my-2 ">Dog&apos;s Name<span className="text-rose-600">*</span></label>
             <select id="dogSelect"  value={selectedDogObj ? selectedDogObj.name : ''} className="rounded-md indent-1 px-1 py-2 focus:outline-rose-800" onChange={handleSelectChange}>
                 <option value="">Select a companion...</option>
-                {dogs.map((dog) => (
+                {availableDogs.map((dog) => (
                     <option key={dog.id} value={dog.name} className="font-semibold checked:bg-rose-800 checked:text-gray-100">
                         {dog.name}
                     </option>
