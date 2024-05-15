@@ -42,6 +42,19 @@ export default function DogDetails() {
           />
           {isReserved && <ReservedBanner />}
         </div>
+        {selectedDog.tags.includes("Available") && (
+        <div className=" text-center my-4">
+         <Link to="/application">
+          <button 
+          className="bg-rose-900 rounded border-4 px-4 py-1.5 border-rose-900 hover:bg-rose-950 
+          hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black text-xl tracking-wide"
+          onClick={scrollToTop}
+          >
+            Apply to take {selectedDog.name} home
+          </button>
+          </Link>
+        </div>
+      )}
         <div className="flex justify-center font-semibold ">
           <p className="m-2">Age: {selectedDog.age}</p>
           <p className="m-2 ">Gender: {selectedDog.gender}</p>
@@ -77,19 +90,7 @@ export default function DogDetails() {
           ))}
         </div>
       </div>
-      {selectedDog.tags.includes("Available") && (
-        <div className=" text-center my-4">
-         <Link to="/application">
-          <button 
-          className="bg-rose-900 rounded border-4 px-4 py-1.5 border-rose-900 hover:bg-rose-950 
-          hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black text-xl tracking-wide"
-          onClick={scrollToTop}
-          >
-            Apply to take {selectedDog.name} home
-          </button>
-          </Link>
-        </div>
-      )}
+    
     </div>
   );
 }
