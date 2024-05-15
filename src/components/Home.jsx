@@ -24,12 +24,12 @@ export default function Home() {
           the love, care, and attention they deserve. Come visit us and discover
           the joy of Rottweiler companionship in the heart of Charlestown.
         </p>
-        <div className="m-4 flex justify-center h-1/3 ">
+        <div className="m-4 flex justify-center ">
           <iframe
-            className="rounded-lg shadow-lg shadow-gray-800"
+            className="rounded-lg shadow-lg shadow-gray-800 mb-4"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.4753431226777!2d-71.66289602343963!3d41.38548229611259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e5c1fa54b62fb5%3A0xb7cac8bba0289eed!2s4969%20Post%20Rd!5e0!3m2!1sen!2sus!4v1715784066888!5m2!1sen!2sus"
-            width="full"
-            height="full"
+            width="300"
+            height="300"
             style={{ border: "0" }}
             allowfullscreen=""
             loading="lazy"
