@@ -1,4 +1,3 @@
-import React from "react";
 import ADRKLogo from "../assets/images/adrk-logo.png";
 import AKCLogo from "../assets/images/AKC-Logo.png";
 import FCILogo from "../assets/images/fci-Logo.png";

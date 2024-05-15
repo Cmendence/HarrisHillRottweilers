@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReservedBanner from "./ReservedBanner";
 
 export default function DogDetails() {
@@ -12,6 +12,10 @@ export default function DogDetails() {
 
   const isReserved = selectedDog.tags.includes("Reserved");
 
+
+  const scrollToTop = () => {
+   window.scrollTo(0,0);
+  }
   const toggleEnlargeImage = (index) => {
     setEnlargedImageIndex(enlargedImageIndex === index ? null : index);
   };
@@ -43,8 +47,13 @@ export default function DogDetails() {
           <p className="m-2 ">Gender: {selectedDog.gender}</p>
         </div>
         <hr className="border-1 border-rose-900 mx-8 my-4" />
-        <h2 className="lg:text-2xl text-xl font-semibold text-gray-800 tracking-wide"> Certifications</h2>
-        <p className="text-xs text-gray-700 mb-2 tracking-tighter">Click an image to enlarge</p>
+        <h2 className="lg:text-2xl text-xl font-semibold text-gray-800 tracking-wide">
+          {" "}
+          Certifications
+        </h2>
+        <p className="text-xs text-gray-700 mb-2 tracking-tighter">
+          Click an image to enlarge
+        </p>
         <div className=" relative flex">
           {selectedDog.certs.map((cert, index) => (
             <div
@@ -55,8 +64,9 @@ export default function DogDetails() {
                   : "lg:w-1/5 w-1/4"
               }`}
             >
-               
-              <h2 className="font-semibold lg:text-base text-xs">{cert.name}</h2>
+              <h2 className="font-semibold lg:text-base text-xs">
+                {cert.name}
+              </h2>
               <img
                 src={cert.image}
                 className={` rounded-md lg:my-4 my-2 `}
@@ -67,6 +77,19 @@ export default function DogDetails() {
           ))}
         </div>
       </div>
+      {selectedDog.tags.includes("Available") && (
+        <div className=" text-center my-4">
+         <Link to="/application">
+          <button 
+          className="bg-rose-900 rounded border-4 px-4 py-1.5 border-rose-900 hover:bg-rose-950 
+          hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black text-xl tracking-wide"
+          onClick={scrollToTop}
+          >
+            Apply to take {selectedDog.name} home
+          </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
