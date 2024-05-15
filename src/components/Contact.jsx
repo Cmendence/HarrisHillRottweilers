@@ -81,7 +81,7 @@ export default function Contact() {
             </span>{" "}
             &nbsp; Call
           </h2>
-          <p className="mb-2 ml-12">401-256-1442</p>
+          <p className="mb-2 ml-12"><a href="tel:401-256-1442">401-256-1442</a></p>
         </div>
         <hr className="border-1 border-rose-800 mb-2 lg:hidden" />
         <div>
@@ -91,7 +91,7 @@ export default function Contact() {
             </span>{" "}
             &nbsp; Email
           </h2>
-          <p className="mb-2 ml-12">Harrishillrottweilers@yahoo.com</p>
+          <p className="mb-2 ml-12"><a href="mailto:Harrishillrottweilers@yahoo.com" className="">Harrishillrottweilers@yahoo.com</a></p>
         </div>
         <hr className="border-1 border-rose-800 mb-2 lg:hidden" />
 
@@ -100,10 +100,10 @@ export default function Contact() {
             <span className="rounded-full border border-gray-700 bg-yellow-400 p-2">
               {locationPin}
             </span>{" "}
-            &nbsp; Harris Hill Rottweilers LLC
+            &nbsp; <a href="geo:41.38564731303219, -71.66026745863803">Harris Hill Rottweilers LLC</a>
           </h2>
-          <p className="ml-12">4969 Post Rd</p>
-          <p className="ml-12">Charlestown, RI 02813</p>
+          <p className="ml-12"><a href="geo:41.38564731303219, -71.66026745863803">4969 Post Rd</a></p>
+          <p className="ml-12"><a href="geo:41.38564731303219, -71.66026745863803">Charlestown, RI 02813</a></p>
         </div>
       </div>
     </div>

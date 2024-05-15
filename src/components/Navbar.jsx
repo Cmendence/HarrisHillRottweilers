@@ -150,7 +150,8 @@ export default function Navbar({ isLoggedIn, toggleLogin }) {
                 <Link
                   to="/login"
                   className="hover:text-yellow-400 active:text-yellow-600 text-xs text-gray-300 font-semibold absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-                >
+                  onClick={() => { close(); }}
+               >
                   Admin
                 </Link>
               )}

@@ -157,47 +157,14 @@ const handleSelectChange = (e) => {
                     </option>
                 ))}
             </select>
+            </div>
+        </div>
+          <div className="flex items-center flex-col">
             {selectedDogObj &&       <img
                   src={selectedDogObj.image}
                   alt={selectedDogObj.name}
-                  className="mt-4 lg:ml-20 ml-10 rounded-lg lg:w-48 w-32 shadow-lg shadow-black"
+                  className="mt-4 rounded-lg lg:w-48 w-32 shadow-lg shadow-black"
                 />}
-            </div>
-        </div>
-          {/* <label htmlFor="Address" className="text-gray-300 ml-2">
-            Address <span className="text-rose-600">*</span>
-          </label>
-
-          <input
-            type="address"
-            placeholder="123 Fake St."
-            name="address"
-            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
-            required
-          /> */}
-          {/* <label htmlFor="Address" className="text-gray-300 ml-2">
-            Address <span className="text-rose-600">*</span>
-          </label>
-
-          <input
-            type="address"
-            placeholder="123 Fake St."
-            name="address"
-            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
-            required
-          />
-          <label htmlFor="Address" className="text-gray-300 ml-2">
-            Address <span className="text-rose-600">*</span>
-          </label>
-
-          <input
-            type="address"
-            placeholder="123 Fake St."
-            name="address"
-            className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 "
-            required
-          /> */}
-          <div className="flex justify-center">
             <button
               type="submit"
               className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"
