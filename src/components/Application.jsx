@@ -5,17 +5,33 @@ import "react-phone-input-2/lib/style.css";
 export default function Application({dogs}) {
 
 const [selectedDogObj, setSelectedDogObj] = useState(null)
+const [selectedGender, setSelectedGender] = useState('');
 
-const availableDogs = dogs.filter((dog) => dog.tags.includes("Available"));
+
+// const availableDogs = dogs.filter((dog) => dog.tags.includes("Available"));
+
+const filterDogs = (selectedGender) => {
+   const filteredDogs = dogs.filter((dog) => {
+       // Check if the dog is available and matches the selected gender
+       return dog.tags.includes("Available") && (selectedGender === '' || dog.gender === selectedGender);
+   });
+   return filteredDogs;
+};
 
 const handleSelectChange = (e) => {
    const selectedDogName = e.target.value;
-   const selectedDog = availableDogs.find((dog) => dog.name === selectedDogName);
+   const selectedDog = filteredDogs.find((dog) => dog.name === selectedDogName);
    setSelectedDogObj(selectedDog);
 };
 
+const handleGenderChange = (e) => {
+   setSelectedGender(e.target.value);
+};
+
+const filteredDogs = filterDogs(selectedGender);
+
   return (
-    <div className="lg:m-12 mt-4">
+    <div className="lg:m-12 mt-4 m-4">
       <h1 className="text-4xl text-gray-800 capitalize font-bold text-center mb-4">
         {" "}
         Application for companionship
@@ -25,7 +41,7 @@ const handleSelectChange = (e) => {
         Drop us a line and we&apos;ll be in touch soon.
       </p>
       <div className=" flex justify-center lg-m-4">
-        <form className="border-gray-800 bg-gray-800 border-4 lg:p-8 p-4 rounded-md m-10 lg:w-1/2 font-semibold shadow-lg shadow-gray-600">
+        <form className=" bg-gray-800 lg:p-8 py-4 px-2 rounded-md m-10 lg:w-1/2 font-semibold shadow-lg shadow-gray-600">
           
           <div className="lg:flex justify-center">
             <div className="flex flex-col">
@@ -36,7 +52,7 @@ const handleSelectChange = (e) => {
                 type="text"
                 placeholder="Tom"
                 name="firstName"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
+                className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
                 required
               />
             </div>
@@ -49,7 +65,7 @@ const handleSelectChange = (e) => {
                 type="text"
                 placeholder="Brady"
                 name="lastName"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
+                className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 capitalize"
                 required
               />
             </div>
@@ -64,7 +80,7 @@ const handleSelectChange = (e) => {
                 type="email"
                 placeholder="BradyGaga@gmail.com"
                 name="email"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
                 required
               />
             </div>
@@ -86,7 +102,7 @@ const handleSelectChange = (e) => {
                 type="address"
                 placeholder="123 Fake St."
                 name="address"
-                className="m-2 px-1 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+                className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
                 required
               />
             </div>
@@ -146,17 +162,31 @@ const handleSelectChange = (e) => {
               />
             </div>
           </div>
-          <div className=" flex justify-center">
-            <div className=" flex flex-col lg:w-2/3">
-            <label htmlFor="dogSelect" className="text-gray-300 mx-0 my-2 ">Dog&apos;s Name<span className="text-rose-600">*</span></label>
+          <hr className="border-yellow-400 m-4" />
+          <h2 className="font-semibold text-xl text-gray-300 text-center">Dog Information</h2>
+          <div className=" flex justify-center ">
+            <div className=" flex items-center  justify-between">
+            <div className="flex flex-col">
+               <label htmlFor="dogGender" className="text-gray-300 mx-0 my-2 font-semibold ">Gender <span className="text-rose-600">*</span></label>
+               <select id="dogGender" value={selectedGender} onChange={handleGenderChange} className="rounded-md indent-1 px-1 py-2 focus:outline-rose-800">
+                  <option value="" className="font-semibold checked:bg-rose-800 checked:text-gray-100">Select Gender...</option>
+                  <option value="Male" className="font-semibold checked:bg-rose-800 checked:text-gray-100">Male</option>
+                  <option value="Female" className="font-semibold checked:bg-rose-800 checked:text-gray-100">Female</option>
+
+               </select>
+            </div>
+               <div className="flex flex-col w-1/2">
+            <label htmlFor="dogSelect" className="text-gray-300 mx-0 my-2 ">Name <span className="text-rose-600">*</span></label>
             <select id="dogSelect"  value={selectedDogObj ? selectedDogObj.name : ''} className="rounded-md indent-1 px-1 py-2 focus:outline-rose-800" onChange={handleSelectChange}>
-                <option value="">Select a companion...</option>
-                {availableDogs.map((dog) => (
+                <option value="" className="font-semibold">Select a companion...</option>
+                {filteredDogs.map((dog) => (
                     <option key={dog.id} value={dog.name} className="font-semibold checked:bg-rose-800 checked:text-gray-100">
                         {dog.name}
                     </option>
                 ))}
             </select>
+            </div>
+         
             </div>
         </div>
           <div className="flex items-center flex-col">
