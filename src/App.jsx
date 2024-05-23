@@ -1,6 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import { useAuth } from "./components/GoogleAuthProvider.jsx";
 import Home from "./components/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Males from "./components/Males.jsx";
@@ -21,6 +27,8 @@ import { dogs } from "./assets/dogs.js";
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const { user, login, logout } = useAuth();
+
   const handleDogClick = (dog) => {
     localStorage.setItem("selectedDog", JSON.stringify(dog));
     JSON.parse(localStorage.getItem("selectedDog"));
@@ -35,11 +43,15 @@ export default function App() {
 
   return (
     <Router>
-      <div className="bg-stone-300 min-h-screen min-w-screen">
+      <div className="bg-stone-300 min-h-screen min-w-screen flex flex-col">
+         <div className="flex flex-grow flex-col">
         <Navbar
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          toggleLogin={toggleLogin}
+         //  isLoggedIn={isLoggedIn}
+         //  setIsLoggedIn={setIsLoggedIn}
+         //  toggleLogin={toggleLogin}
+          user={user}
+          login={login}
+          logout={logout}
         />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -60,20 +72,27 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/application" element={<Application dogs={dogs} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute component={Dashboard} />
+            }
+          />
           <Route
             path="/login"
             element={
               <Login
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                toggleLogin={toggleLogin}
+               //  isLoggedIn={isLoggedIn}
+               //  setIsLoggedIn={setIsLoggedIn}
+               //  toggleLogin={toggleLogin}
               />
             }
           />
           <Route path="/details/:id" element={<DogDetails />} />
         </Routes>
+        </div>
         <Licenses />
+
         <Footer />
       </div>
     </Router>
