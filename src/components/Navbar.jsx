@@ -184,12 +184,13 @@
 //     </Disclosure>
 //   );
 // }
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import ProfilePic from "../assets/images/dog3.jpg";
+import { useAuth } from "./GoogleAuthProvider";
 
 // Define the navigation links
 const navigation = [
@@ -209,16 +210,12 @@ function classNames(...classes) {
 }
 
 // Update the Navbar component
-export default function Navbar({ user, login, logout }) {
+export default function Navbar() {
   // Change props to user, login, and logout
 
-  const [redirectToDashboard, setRedirectToDashboard] = useState(false);
 
-  // Function to handle login
-  const handleLogin = () => {
-    login(); // Call the login function passed as prop
-    setRedirectToDashboard(true); // Set redirectToDashboard to true after login
-  };
+const {user, logout, isAuthorized} = useAuth();
+
   return (
     <Disclosure as="nav" className="bg-gray-950">
       {({ open, close }) => (
@@ -269,7 +266,7 @@ export default function Navbar({ user, login, logout }) {
                 </div>
               </div>
               {/* Conditionally render based on whether the user is logged in */}
-              {user ? (
+              {user && isAuthorized? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
@@ -288,8 +285,8 @@ export default function Navbar({ user, login, logout }) {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src={ProfilePic}
-                          alt=""
+                          src={user.picture ? user.picture : ProfilePic}
+                          alt="user profile picture"
                         />
                       </Menu.Button>
                     </div>
@@ -332,7 +329,7 @@ export default function Navbar({ user, login, logout }) {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="#"
+                              to={'/'}
                               onClick={logout} // Call the logout function when clicked
                               className={classNames(
                                 active ? "bg-gray-100" : "",
@@ -351,6 +348,7 @@ export default function Navbar({ user, login, logout }) {
                
                 <Link
                   to='/login'
+                  onClick={logout}
                   className="hover:text-yellow-400 active:text-yellow-600 text-xs text-gray-300 font-semibold absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
                 >
                   Admin

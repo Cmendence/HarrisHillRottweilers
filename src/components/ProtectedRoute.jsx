@@ -1,24 +1,25 @@
-import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import { useAuth } from './GoogleAuthProvider';
 
-const approvedEmails = ['chris.mendence@gmail.com']; // List of approved emails
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "./GoogleAuthProvider";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { user } = useAuth();
+const ProtectedRoute = () => {
+  const { user, isAuthorized } = useAuth();
+  const navigate = useNavigate();
 
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        user && approvedEmails.includes(user.email) ? (
-          <Component {...props} />
-        ) : (
-          <Navigate to="/login" replace />
-        )
-      }
-    />
-  );
+  useEffect(() => {
+    if (!user) {
+      // User is not authenticated, redirect to Login component
+      navigate("/unauth");
+    } else if (!isAuthorized) {
+      // User is authenticated but not approved, redirect to UnAuth component
+      navigate("/unauth");
+    }
+  }, [user, isAuthorized, navigate]);
+
+  // User is authenticated and approved, render the protected component
+  return <Outlet />;
 };
 
 export default ProtectedRoute;
+

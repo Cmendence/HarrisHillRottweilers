@@ -1,5 +1,5 @@
 import React from "react";
-import DogCard from "./DogCard";
+import DogCard from "../DogCard";
 
 export default function Females({ handleDogClick, dogs }) {
   const femaleDogs = dogs.filter((dog) => dog.tags.includes("Female"));

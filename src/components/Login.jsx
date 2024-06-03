@@ -1,108 +1,32 @@
-// import React from "react";
 
-// export default function Login({ isLoggedIn, setIsLoggedIn, toggleLogin }) {
-//   return (
-//     <>
-//       {/*
-//          This example requires updating your template:
- 
-//          ```
-//          <html class="h-full bg-white">
-//          <body class="h-full">
-//          ```
-//        */}
-//       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-//         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-//           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-800">
-//             Welcome Back
-//           </h2>
-//         </div>
-
-//         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm min-h-screen">
-//           <form className="space-y-6" action="#" method="POST">
-//             <div>
-//               <label
-//                 htmlFor="email"
-//                 className="block text-sm font-medium leading-6 text-gray-800"
-//               >
-//                 Email address
-//               </label>
-//               <div className="mt-2">
-//                 <input
-//                   id="email"
-//                   name="email"
-//                   type="email"
-//                   autoComplete="email"
-//                   required
-//                   className="indent-4 pr-4 w-full py-2 rounded-md focus:outline-rose-800 font-semibold text-gray-800"
-//                 />
-//               </div>
-//             </div>
-
-//             <div>
-//               <div className="flex items-center justify-between">
-//                 <label
-//                   htmlFor="password"
-//                   className="block text-sm font-medium leading-6 text-gray-800"
-//                 >
-//                   Password
-//                 </label>
-//                 <div className="text-sm">
-//                   <a
-//                     href="#"
-//                     className="font-semibold text-rose-900 hover:text-rose-950"
-//                   >
-//                     Forgot password?
-//                   </a>
-//                 </div>
-//               </div>
-//               <div className="mt-2">
-//                 <input
-//                   id="password"
-//                   name="password"
-//                   type="password"
-//                   autoComplete="current-password"
-//                   required
-//                   className=" indent-4 pr-4 w-full py-2 rounded-md focus:outline-rose-800 "
-//                 />
-//               </div>
-//             </div>
-
-//             <div>
-//               <button
-//                 onClick={(e) => toggleLogin(e)}
-//                 type="submit"
-//                 className=" text-center w-full py-1.5 bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 text-slate-100 font-semibold shadow-md shadow-black"
-//               >
-//                 Sign in
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-
-import { useAuth } from './GoogleAuthProvider';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./GoogleAuthProvider";
+import GoogleLogo from '../assets/icons/google-logo-transparent.png';
 
 const Login = () => {
-  const { login } = useAuth();
+  const { user, isAuthorized, login, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const handleGoogleLogin = () => {
-    login(); // Call the login function for Google OAuth
-  };
+  useEffect(() => {
+    if (user && isAuthorized) {
+      navigate("/dashboard"); // Navigate to dashboard if authorized
+    } else if (user && !isAuthorized) {
+      navigate("/unauth"); // Navigate to UnAuth if not authorized
+    }
+  }, [user, isAuthorized, navigate]); // Dependency array ensures effect runs when user or isAuthorized changes
 
   return (
     <div className='flex flex-col items-center m-8 h-full'>
-  <h1 className='font-semibold text-2xl text-gray-800'> Admin Login</h1>
+      <h1 className='font-semibold text-4xl text-gray-800'>Admin Login</h1>
       <button  
-              className="bg-rose-900 rounded border-2 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black m-4 px-4"
-      
-      onClick={handleGoogleLogin}>Login with Google</button>
+        className="bg-rose-900 rounded border-2 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 lg:text-3xl text-xl font-semibold shadow-md shadow-black m-10 lg:px-6 px-4 py-1 flex items-center"
+        onClick={login}>
+        Login with <img className='lg:w-36 w-20 mt-2' src={GoogleLogo} alt="Google Logo" />
+      </button>
     </div>
   );
 };
 
 export default Login;
+

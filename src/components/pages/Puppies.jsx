@@ -1,17 +1,16 @@
 import React from "react";
-// import { dogs } from "../assets/dogs";
-import DogCard from "./DogCard";
+import DogCard from "../DogCard";
 
-export default function Males({ handleDogClick, dogs }) {
-  const maleDogs = dogs.filter((dog) => dog.tags.includes("Male"));
+export default function Females({ handleDogClick, dogs }) {
+  const puppies = dogs.filter((dog) => dog.tags.includes("Puppy"));
 
   return (
     <div>
       <h1 className=" text-center text-3xl font-semibold text-gray-800 my-4">
-        Our Males
+        Our Puppies
       </h1>
       <div className="flex justify-center flex-wrap lg:m-8 my-8">
-        {maleDogs.map((dog) => (
+        {puppies.map((dog) => (
           <DogCard
             id={dog.id}
             key={dog.id}
