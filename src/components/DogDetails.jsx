@@ -34,7 +34,7 @@ export default function DogDetails() {
         </h1>
         <div className="flex justify-center mx-8 my-2 relative">
           <img
-            src={selectedDog.image}
+            src={selectedDog.images}
             alt={`image of ${selectedDog.name}`}
             className={`lg:w-1/3 rounded-lg shadow-lg shadow-gray-900 ${
               isReserved && "opacity-75"
@@ -73,17 +73,17 @@ export default function DogDetails() {
               key={index}
               className={`mx-4 flex items-center flex-col ${
                 enlargedImageIndex === index
-                  ? "absolute lg:inset-x-72 bottom-0 lg:w-1/2 object-contain z-50 text-yellow-400"
+                  ? "absolute lg:inset-x-72 bottom-0 lg:w-2/5 object-contain z-50 text-yellow-400"
                   : "lg:w-1/5 w-1/4"
               }`}
             >
-              <h2 className="font-semibold lg:text-base text-xs">
+              {/* <h2 className="font-semibold lg:text-base text-xs">
                 {cert.name}
-              </h2>
+              </h2> */}
               <img
-                src={cert.image}
+                src={cert.url}
                 className={` rounded-md lg:my-4 my-2 `}
-                alt={`certifications for ${selectedDog.name}`}
+                alt={`Certifications for ${selectedDog.name}`}
                 onClick={() => toggleEnlargeImage(index)}
               />
             </div>

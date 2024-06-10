@@ -83,6 +83,7 @@
 //   );
 // }
 
+// App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AppProvider from "./components/GoogleAuthProvider.jsx";
@@ -102,6 +103,7 @@ import Login from "./components/Login.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import DogDetails from "./components/DogDetails.jsx";
 import UnAuth from "./components/pages/UnAuth.jsx";
+import { DataProvider } from "./components/useData.jsx"; // Import the DataContext provider
 import { dogs } from "./assets/dogs.js";
 
 export default function App() {
@@ -113,48 +115,50 @@ export default function App() {
 
   return (
     <AppProvider>
-      <Router>
-        <div className="bg-stone-300 min-h-screen min-w-screen flex flex-col">
-          <div className="flex flex-grow flex-col">
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/males"
-                element={<Males handleDogClick={handleDogClick} dogs={dogs} />}
-              />
-              <Route
-                path="/females"
-                element={
-                  <Females handleDogClick={handleDogClick} dogs={dogs} />
-                }
-              />
-              <Route
-                path="/puppies"
-                element={
-                  <Puppies handleDogClick={handleDogClick} dogs={dogs} />
-                }
-              />
-              <Route path="/pastLitters" element={<PastLitters />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route
-                path="/application"
-                element={<Application dogs={dogs} />}
-              />
-              <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/unauth" element={<UnAuth />} />
-              <Route path="/details/:id" element={<DogDetails />} />
-              <Route path="/dashboard" element={<ProtectedRoute />}>
-                <Route path="" element={<Dashboard />} />
-              </Route>
-            </Routes>
+      <DataProvider>
+        <Router>
+          <div className="bg-stone-300 min-h-screen min-w-screen flex flex-col">
+            <div className="flex flex-grow flex-col">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/males"
+                  element={<Males handleDogClick={handleDogClick} />}
+                />
+                <Route
+                  path="/females"
+                  element={
+                    <Females handleDogClick={handleDogClick} />
+                  }
+                />
+                <Route
+                  path="/puppies"
+                  element={
+                    <Puppies handleDogClick={handleDogClick} />
+                  }
+                />
+                <Route path="/pastLitters" element={<PastLitters />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route
+                  path="/application"
+                  element={<Application dogs={dogs} />}
+                />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/unauth" element={<UnAuth />} />
+                <Route path="/details/:id" element={<DogDetails />} />
+                <Route path="/dashboard" element={<ProtectedRoute />}>
+                  <Route path="" element={<Dashboard />} />
+                </Route>
+              </Routes>
+            </div>
+            <Licenses />
+            <Footer />
           </div>
-          <Licenses />
-          <Footer />
-        </div>
-      </Router>
+        </Router>
+      </DataProvider>
     </AppProvider>
   );
 }
