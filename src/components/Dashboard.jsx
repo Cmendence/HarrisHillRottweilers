@@ -8,7 +8,6 @@ const AdminDashboard = () => {
   const [dogs, setDogs] = useState([]);
   const [form, setForm] = useState({
     name: "",
-    gender: "",
     birthdate: "",
     images: [],
     mother: "",
@@ -21,6 +20,7 @@ const AdminDashboard = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState({ show: false, dogId: null });
+  const [dogBeingEdited, setDogBeingEdited] = useState(null)
 
   const tags = [
     { name: "Male" },
@@ -98,12 +98,16 @@ const AdminDashboard = () => {
     }
   };
 
+
   const handleEditDog = (id) => {
+   
     const dogToEdit = dogs.find((dog) => dog.id === id);
     if (dogToEdit) {
       setForm(dogToEdit);
       setIsEditing(true);
       setCurrentDogId(id);
+      setDogBeingEdited(dogToEdit.name)
+      window.scrollTo(0,0)
     } else {
       console.error("Dog to edit not found in local state.");
     }
@@ -197,7 +201,7 @@ const AdminDashboard = () => {
 
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg shadow-gray-600 mb-8">
         <h2 className="text-2xl text-gray-100 font-semibold mb-4">
-          {isEditing ? "Edit Dog" : "Add Dog"}
+          {isEditing ? `Editing ${dogBeingEdited}` : "Add Dog"}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex flex-col">
@@ -214,7 +218,7 @@ const AdminDashboard = () => {
             />
           </div>
           <div className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4">
-            <label className="text-gray-100 ml-4" htmlFor="tags">Tags</label>
+            <label className="text-gray-100 ml-4" htmlFor="tags">Tags:</label>
             {tags.map((tag) => (
               <label className="text-gray-100 ml-4" key={tag.name}>
                 <input
@@ -222,7 +226,7 @@ const AdminDashboard = () => {
                   name={tag.name}
                   checked={form.tags.includes(tag.name)}
                   onChange={handleTagCheckboxChange}
-                  className="mr-2"
+                  className="mr-2 accent-rose-800 cursor-pointer"
                 />
                 {tag.name}
               </label>
@@ -274,7 +278,7 @@ const AdminDashboard = () => {
               type="file"
               multiple
               onChange={(e) => handleFileChange(e, "images")}
-              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100"
+              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
           </div>
           <div className="flex flex-col">
@@ -285,7 +289,7 @@ const AdminDashboard = () => {
               type="file"
               multiple
               onChange={(e) => handleFileChange(e, "certs")}
-              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 bg-rose-800 hover:bg-green-700 text-gray-100"
+              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
           </div>
         </div>
