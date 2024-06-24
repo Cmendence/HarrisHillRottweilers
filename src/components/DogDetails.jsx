@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReservedBanner from "./ReservedBanner";
+import { calculateAge } from "./utils/ageCalc";
 
 export default function DogDetails() {
   const [enlargedImageIndex, setEnlargedImageIndex] = useState(null);
@@ -56,7 +57,7 @@ export default function DogDetails() {
         </div>
       )}
         <div className="flex justify-center font-semibold ">
-          <p className="m-2">Age: {selectedDog.age}</p>
+          <p className="m-2">Age: {calculateAge(selectedDog.birthdate)}</p>
           <p className="m-2 ">Gender: {selectedDog.gender}</p>
         </div>
         <hr className="border-1 border-rose-900 mx-8 my-4" />

@@ -15,15 +15,15 @@ export default function Females({ handleDogClick }) {
     return <div>Loading...</div>; // Show a loading state while data is being fetched
   }
 
-  const femaleDogs = dogs.filter((dog) => dog.tags.includes("Male"));
+  const maleDogs = dogs.filter((dog) => dog.tags.includes("Male"));
 
   return (
     <div>
       <h1 className=" text-center text-3xl font-semibold text-gray-800 my-4">
-        Our Females
+        Our Males
       </h1>
       <div className="flex justify-center flex-wrap lg:m-8 my-8">
-        {femaleDogs.map((dog) => (
+        {maleDogs.map((dog) => (
           <DogCard
             id={dog.id}
             key={dog.id}
