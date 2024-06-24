@@ -8,10 +8,13 @@ export default function DogDetails() {
 
   const navigate = useNavigate();
 
+  
   const getDogFromLS = localStorage.getItem("selectedDog");
   const selectedDog = JSON.parse(getDogFromLS);
-
+  
+  console.log(selectedDog)
   const isReserved = selectedDog.tags.includes("Reserved");
+  const dogGender = selectedDog.tags.includes("Male") ? "Male" : "Female"
 
 
   const scrollToTop = () => {
@@ -35,7 +38,7 @@ export default function DogDetails() {
         </h1>
         <div className="flex justify-center mx-8 my-2 relative">
           <img
-            src={selectedDog.images}
+            src={selectedDog.images[0].url}
             alt={`image of ${selectedDog.name}`}
             className={`lg:w-1/3 rounded-lg shadow-lg shadow-gray-900 ${
               isReserved && "opacity-75"
@@ -58,7 +61,7 @@ export default function DogDetails() {
       )}
         <div className="flex justify-center font-semibold ">
           <p className="m-2">Age: {calculateAge(selectedDog.birthdate)}</p>
-          <p className="m-2 ">Gender: {selectedDog.gender}</p>
+          <p className="m-2 ">Gender: {dogGender}</p>
         </div>
         <hr className="border-1 border-rose-900 mx-8 my-4" />
         <h2 className="lg:text-2xl text-xl font-semibold text-gray-800 tracking-wide">
@@ -78,9 +81,7 @@ export default function DogDetails() {
                   : "lg:w-1/5 w-1/4"
               }`}
             >
-              {/* <h2 className="font-semibold lg:text-base text-xs">
-                {cert.name}
-              </h2> */}
+
               <img
                 src={cert.url}
                 className={` rounded-md lg:my-4 my-2 `}

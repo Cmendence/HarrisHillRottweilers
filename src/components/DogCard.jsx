@@ -10,7 +10,7 @@ export default function DogCard({ dog, handleDogClick }) {
         <Link to={`/details/${dog.id}`} rel="noopener noreferrer">
           <div className="relative">
             <img
-              src={dog.images[0]}
+              src={dog.images[0].url}
               className={`rounded-lg shadow-lg shadow-gray-600 ${
                 isReserved && "opacity-75"
               }`}

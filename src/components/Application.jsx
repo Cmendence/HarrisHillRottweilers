@@ -10,7 +10,6 @@ export default function Application() {
 
   useEffect(() => {
     fetchData(); // Fetch the data when the component mounts
-    console.log("DOGGIES", dogs);
   }, []);
 
   const isMaleOrFemale = (dog) => {
@@ -42,7 +41,7 @@ export default function Application() {
               Thank you for your interest.
             </p>
             <p className="lg:text-xl text-lg font-semibold mb-2 text-clip">
-              We'll be in touch soon!
+              We&apos;ll be in touch soon!
             </p>
             <button
               className="bg-rose-900 rounded border-2 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black m-4 lg:w-28 lg:h-10 w-20 h-10"
@@ -209,7 +208,7 @@ export default function Application() {
           <div className="flex items-center flex-col">
             {selectedDogObj && (
               <img
-                src={selectedDogObj.images[0]} // Assuming images is an array
+                src={selectedDogObj.images[0].url}
                 alt={selectedDogObj.name}
                 className="mt-4 rounded-lg lg:w-48 w-32 shadow-lg shadow-black"
               />

@@ -1,26 +1,34 @@
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import { db, storage } from "../firebase.js";
 import { collection, addDoc, updateDoc, getDocs, doc, getDoc, deleteDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { calculateAge } from "../components/utils/ageCalc.jsx"
+import { calculateAge } from "../components/utils/ageCalc.jsx";
+import DashDogCard from "./DashDogCard.jsx";
 
 const AdminDashboard = () => {
   const [dogs, setDogs] = useState([]);
   const [form, setForm] = useState({
     name: "",
     birthdate: "",
-    images: [],
     mother: "",
     father: "",
-    certs: [],
     tags: [],
+  });
+  const [existingFiles, setExistingFiles] = useState({
+    images: [],
+    certs: [],
+  });
+  const [newFiles, setNewFiles] = useState({
+    images: [],
+    certs: [],
   });
   const [isEditing, setIsEditing] = useState(false);
   const [currentDogId, setCurrentDogId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState({ show: false, dogId: null });
-  const [dogBeingEdited, setDogBeingEdited] = useState(null)
+  const [dogBeingEdited, setDogBeingEdited] = useState(null);
 
   const tags = [
     { name: "Male" },
@@ -61,12 +69,23 @@ const AdminDashboard = () => {
 
   const handleFileChange = (e, key) => {
     const files = Array.from(e.target.files);
-    setForm({ ...form, [key]: files });
+    const filesWithNames = files.map(file => ({ file, name: file.name }));
+    setNewFiles({ ...newFiles, [key]: [...newFiles[key], ...filesWithNames] });
+  };
+
+  const handleFileDelete = (index, key, existing = true) => {
+    if (existing) {
+      const updatedFiles = existingFiles[key].filter((_, i) => i !== index);
+      setExistingFiles({ ...existingFiles, [key]: updatedFiles });
+    } else {
+      const updatedFiles = newFiles[key].filter((_, i) => i !== index);
+      setNewFiles({ ...newFiles, [key]: updatedFiles });
+    }
   };
 
   const uploadFiles = async (files, path) => {
     const urls = await Promise.all(
-      files.map(async (file) => {
+      files.map(async ({ file }) => {
         const storageRef = ref(storage, `${path}/${file.name}`);
         await uploadBytes(storageRef, file);
         return await getDownloadURL(storageRef);
@@ -76,13 +95,13 @@ const AdminDashboard = () => {
   };
 
   const handleAddDog = async () => {
-    const images = await uploadFiles(form.images, `dogs/images`);
-    const certs = await uploadFiles(form.certs, `dogs/certs`);
+    const images = await uploadFiles(newFiles.images, `dogs/images`);
+    const certs = await uploadFiles(newFiles.certs, `dogs/certs`);
 
     const newDog = {
       ...form,
-      images,
-      certs: certs.map((url, idx) => ({ name: form.certs[idx].name, url })),
+      images: images.map((url, idx) => ({ name: newFiles.images[idx].name, url })),
+      certs: certs.map((url, idx) => ({ name: newFiles.certs[idx].name, url })),
     };
 
     try {
@@ -92,22 +111,28 @@ const AdminDashboard = () => {
       resetForm();
       setSuccessMessage("Dog successfully added!");
       setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 2000); // Hide after 3 seconds
+      setTimeout(() => setShowSuccessMessage(false), 2000); // Hide after 2 seconds
     } catch (error) {
       console.error("Error adding dog:", error);
     }
   };
 
-
   const handleEditDog = (id) => {
-   
     const dogToEdit = dogs.find((dog) => dog.id === id);
     if (dogToEdit) {
       setForm(dogToEdit);
+      setExistingFiles({
+        images: dogToEdit.images || [],
+        certs: dogToEdit.certs || [],
+      });
+      setNewFiles({
+        images: [],
+        certs: [],
+      });
       setIsEditing(true);
       setCurrentDogId(id);
-      setDogBeingEdited(dogToEdit.name)
-      window.scrollTo(0,0)
+      setDogBeingEdited(dogToEdit.name);
+      window.scrollTo(0, 0);
     } else {
       console.error("Dog to edit not found in local state.");
     }
@@ -130,13 +155,13 @@ const AdminDashboard = () => {
     }
 
     try {
-      const images = await uploadFiles(form.images, `dogs/${currentDogId}/images`);
-      const certs = await uploadFiles(form.certs, `dogs/${currentDogId}/certs`);
+      const newImages = await uploadFiles(newFiles.images, `dogs/${currentDogId}/images`);
+      const newCerts = await uploadFiles(newFiles.certs, `dogs/${currentDogId}/certs`);
 
       const updatedDog = {
         ...form,
-        images,
-        certs: certs.map((url, idx) => ({ name: form.certs[idx].name, url })),
+        images: [...existingFiles.images, ...newImages.map((url, idx) => ({ name: newFiles.images[idx].name, url }))],
+        certs: [...existingFiles.certs, ...newCerts.map((url, idx) => ({ name: newFiles.certs[idx].name, url }))],
       };
 
       await updateDoc(dogDocRef, updatedDog);
@@ -144,7 +169,7 @@ const AdminDashboard = () => {
       console.log("Dog updated successfully:", updatedDog);
       setSuccessMessage("Dog successfully updated!");
       setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 2000); // Hide after 3 seconds
+      setTimeout(() => setShowSuccessMessage(false), 2000); // Hide after 2 seconds
     } catch (error) {
       console.error("Error updating dog:", error);
     }
@@ -181,14 +206,27 @@ const AdminDashboard = () => {
   const resetForm = () => {
     setForm({
       name: "",
-      gender: "",
       birthdate: "",
-      images: [],
       mother: "",
       father: "",
-      certs: [],
       tags: [],
     });
+
+    setExistingFiles({
+      images: [],
+      certs: [],
+    });
+
+    setNewFiles({
+      images: [],
+      certs: [],
+    });
+
+    // Reset the file input fields
+    document.querySelectorAll('input[type="file"]').forEach((input) => {
+      input.value = "";
+    });
+
     setIsEditing(false);
     setCurrentDogId(null);
   };
@@ -217,16 +255,16 @@ const AdminDashboard = () => {
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
             />
           </div>
-          <div className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4">
-            <label className="text-gray-100 ml-4" htmlFor="tags">Tags:</label>
+          <div className="m-2 rounded-md focus:outline-rose-800 indent-1">
+            <label className="text-gray-100 mr-2 " htmlFor="tags">Tags:</label>
             {tags.map((tag) => (
-              <label className="text-gray-100 ml-4" key={tag.name}>
+              <label className="text-gray-100 mr-2 flex" key={tag.name}>
                 <input
                   type="checkbox"
                   name={tag.name}
                   checked={form.tags.includes(tag.name)}
                   onChange={handleTagCheckboxChange}
-                  className="mr-2 accent-rose-800 cursor-pointer"
+                  className="mr-2 accent-rose-800 cursor-pointer "
                 />
                 {tag.name}
               </label>
@@ -246,7 +284,7 @@ const AdminDashboard = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="ml-2 text-gray-100" htmlFor="Father">
+            <label className="ml-2 text-gray-100" htmlFor="father">
               Father
             </label>
             <input
@@ -270,7 +308,7 @@ const AdminDashboard = () => {
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col border border-yellow-500 rounded-md p-4">
             <label className="ml-3 text-gray-100" htmlFor="images">
               Images
             </label>
@@ -280,8 +318,44 @@ const AdminDashboard = () => {
               onChange={(e) => handleFileChange(e, "images")}
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
+            {existingFiles.images.length > 0 && (
+               <div>
+                 <h3 className="text-gray-100">Existing files</h3>
+               <div className="mt-2 flex ">
+                {existingFiles.images.map((image, index) => (
+                  <div key={index} className="relative">
+                    <img src={image.url} alt={image.name} className=" h-24 rounded mr-2" />
+                    <button
+                      onClick={() => handleFileDelete(index, "images", true)}
+                      className="absolute top-1 right-2 bg-rose-700 text-gray-100 text-sm p-1 rounded-full"
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+              </div>
+            )}
+            {newFiles.images.length > 0 && (
+               <div>
+                 <h3 className="text-gray-100">New files</h3>
+              <div className="mt-2 flex">
+                {newFiles.images.map((image, index) => (
+                  <div key={index} className="relative">
+                    <img src={URL.createObjectURL(image.file)} alt={image.name} className=" h-24 rounded" />
+                    <button
+                      onClick={() => handleFileDelete(index, "images", false)}
+                      className="absolute top-1 right-1 bg-rose-700 text-white p-1 text-sm rounded-full"
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+              </div>
+            )}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col border border-yellow-500 rounded-md p-4">
             <label className="ml-2 text-gray-100" htmlFor="certs">
               Certifications
             </label>
@@ -291,6 +365,36 @@ const AdminDashboard = () => {
               onChange={(e) => handleFileChange(e, "certs")}
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
+            {existingFiles.certs.length > 0 && (
+              <div className="mt-2">
+                {existingFiles.certs.map((cert, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="text-gray-100">{cert.name}</span>
+                    <button
+                      onClick={() => handleFileDelete(index, "certs", true)}
+                      className="bg-rose-700 text-white p-1 rounded ml-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            {newFiles.certs.length > 0 && (
+              <div className="mt-2">
+                {newFiles.certs.map((cert, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="text-gray-100">{cert.name}</span>
+                    <button
+                      onClick={() => handleFileDelete(index, "certs", false)}
+                      className="bg-rose-700 text-white p-1 rounded ml-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-4">
@@ -304,7 +408,7 @@ const AdminDashboard = () => {
               </button>
               <button
                 onClick={resetForm}
-                className="bg-red-500 text-white p-2 rounded ml-2"
+                className="bg-rose-700 text-white p-2 rounded ml-2"
               >
                 Cancel
               </button>
@@ -327,63 +431,16 @@ const AdminDashboard = () => {
         <h2 className="text-2xl text-gray-800 font-semibold mb-4">Dogs List</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {dogs.map((dog) => (
-            <div
+            <DashDogCard
               key={dog.id}
-              className="bg-gray-800 p-4 rounded-lg shadow-lg shadow-gray-700"
-            >
-              {dog.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={dog.name}
-                  className="w-full h-48 object-cover rounded mb-4"
-                />
-              ))}
-              <h3 className="text-lg font-bold text-gray-100">{dog.name}</h3>
-              <p className="text-gray-300">Gender: {dog.gender}</p>
-              <p className="text-gray-300">Age: {calculateAge(dog.birthdate)}</p> 
-              <p className="text-gray-300">Mother: {dog.mother}</p>
-              <p className="text-gray-300">Father: {dog.father}</p>
-              <p className="text-gray-300">Birthdate: {dog.birthdate}</p>
-              <p className="text-gray-300">Tags: {dog.tags.map(tag => <p key={tag}>-{tag}</p>)}</p>
-
-              <div className="mt-4 flex justify-between items-start">
-                <button
-                  onClick={() => handleEditDog(dog.id)}
-                  className="bg-yellow-400 text-gray-700 shadow-md shadow-black hover:bg-yellow-500 active:bg-yellow-600 active:shadow-none p-2 rounded"
-                >
-                  Edit
-                </button>
-                <div className="flex items-center">
-                  {deleteConfirmation.show && deleteConfirmation.dogId === dog.id ? (
-                    <div className="flex flex-col items-center">
-                      <p className="text-rose-500 mb-2">Delete {dog.name}?</p>
-                      <div>
-                        <button
-                          onClick={handleDeleteDog}
-                          className="bg-rose-700 text-white p-2 rounded mr-2"
-                        >
-                          Yes
-                        </button>
-                        <button
-                          onClick={cancelDelete}
-                          className="bg-gray-500 text-white p-2 rounded"
-                        >
-                          No
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => confirmDeleteDog(dog.id)}
-                      className="bg-rose-700 shadow-md shadow-black hover:bg-rose-800 active:shadow-none active:bg-rose-950 text-gray-100 p-2 rounded"
-                    >
-                      Delete
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
+              dog={dog}
+              calculateAge={calculateAge}
+              handleEditDog={handleEditDog}
+              deleteConfirmation={deleteConfirmation}
+              handleDeleteDog={handleDeleteDog}
+              cancelDelete={cancelDelete}
+              confirmDeleteDog={confirmDeleteDog}
+            />
           ))}
         </div>
       </div>
