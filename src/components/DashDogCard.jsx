@@ -19,7 +19,7 @@ export default function DashDogCard({
         key={index}
         src={image.url}
         alt={dog.name}
-        className="w-full h-48 object-cover rounded mb-4"
+        className=" h-36 rounded mb-3"
       />
     ))}
     <h3 className="text-lg font-bold text-gray-100">{dog.name}</h3>
@@ -64,7 +64,7 @@ export default function DashDogCard({
         ) : (
           <button
             onClick={() => confirmDeleteDog(dog.id)}
-            className="bg-rose-700 shadow-md shadow-black hover:bg-rose-800 active:shadow-none active:bg-rose-950 text-gray-100 p-2 rounded"
+            className="bg-rose-700 shadow-md shadow-black hover:bg-rose-800 active:shadow-none active:bg-rose-900 text-gray-100 p-2 rounded"
           >
             Delete
           </button>

@@ -5,6 +5,7 @@ import { calculateAge } from "./utils/ageCalc";
 
 export default function DogDetails() {
   const [enlargedImageIndex, setEnlargedImageIndex] = useState(null);
+const [enlargedDogIndex, setEnlargedDogIndex] = useState(0)
 
   const navigate = useNavigate();
 
@@ -16,13 +17,17 @@ export default function DogDetails() {
   const isReserved = selectedDog.tags.includes("Reserved");
   const dogGender = selectedDog.tags.includes("Male") ? "Male" : "Female"
 
-
   const scrollToTop = () => {
    window.scrollTo(0,0);
   }
   const toggleEnlargeImage = (index) => {
     setEnlargedImageIndex(enlargedImageIndex === index ? null : index);
   };
+
+  const toggleEnlargeDog = (index) => {
+   setEnlargedDogIndex(index)
+
+  }
 
   return (
     <div className="">
@@ -38,7 +43,7 @@ export default function DogDetails() {
         </h1>
         <div className="flex justify-center mx-8 my-2 relative">
           <img
-            src={selectedDog.images[0].url}
+            src={selectedDog.images[enlargedDogIndex].url}
             alt={`image of ${selectedDog.name}`}
             className={`lg:w-1/3 rounded-lg shadow-lg shadow-gray-900 ${
               isReserved && "opacity-75"
@@ -46,6 +51,18 @@ export default function DogDetails() {
           />
           {isReserved && <ReservedBanner />}
         </div>
+        <div className="flex justify-center flex-wrap">
+        {selectedDog.images.map((image, index) => (
+           <img key={image.url} 
+           src={image.url} 
+           className="lg:h-24 h-16 rounded-md m-2 shadow-md shadow-gray-800 cursor-pointer" 
+           alt={image.name}
+           onClick={()=>toggleEnlargeDog(index)}
+           />
+         ))
+         
+      }
+      </div>
         {selectedDog.tags.includes("Available") && (
         <div className=" text-center my-4">
          <Link to="/application">

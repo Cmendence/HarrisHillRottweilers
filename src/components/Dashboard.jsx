@@ -255,21 +255,19 @@ const AdminDashboard = () => {
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
             />
           </div>
-          <div className="m-2 rounded-md focus:outline-rose-800 indent-1">
-            <label className="text-gray-100 mr-2 " htmlFor="tags">Tags:</label>
-            {tags.map((tag) => (
-              <label className="text-gray-100 mr-2 flex" key={tag.name}>
-                <input
-                  type="checkbox"
-                  name={tag.name}
-                  checked={form.tags.includes(tag.name)}
-                  onChange={handleTagCheckboxChange}
-                  className="mr-2 accent-rose-800 cursor-pointer "
-                />
-                {tag.name}
-              </label>
-            ))}
+          <div className="flex flex-col">
+            <label className="ml-2 text-gray-100" htmlFor="birthdate">
+              Birthdate
+            </label>
+            <input
+              type="date"
+              name="birthdate"
+              value={form.birthdate}
+              onChange={handleInputChange}
+              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
+            />
           </div>
+
           <div className="flex flex-col">
             <label className="ml-2 text-gray-100" htmlFor="mother">
               Mother
@@ -296,22 +294,31 @@ const AdminDashboard = () => {
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
             />
           </div>
-          <div className="flex flex-col">
-            <label className="ml-2 text-gray-100" htmlFor="birthdate">
-              Birthdate
-            </label>
-            <input
-              type="date"
-              name="birthdate"
-              value={form.birthdate}
-              onChange={handleInputChange}
-              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
-            />
-          </div>
+        
           <div className="flex flex-col border border-yellow-500 rounded-md p-4">
             <label className="ml-3 text-gray-100" htmlFor="images">
               Images
             </label>
+            {newFiles.images.length > 0 && (
+               <div>
+                 <h3 className="text-yellow-500">NEW Files</h3>
+              <div className="mt-2 flex">
+                {newFiles.images.map((image, index) => (
+                  
+                  <div key={index} className="relative mr-2">
+                    <img src={URL.createObjectURL(image.file)} alt={image.name} className=" h-24 rounded" />
+                    <p className="text-gray-100 text-sm mt-1">{image.name}</p>
+                    <button
+                      onClick={() => handleFileDelete(index, "images", false)}
+                      className="absolute top-1 right-1 bg-rose-700 text-white p-1 text-sm rounded-full"
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+              </div>
+            )}
             <input
               type="file"
               multiple
@@ -325,6 +332,8 @@ const AdminDashboard = () => {
                 {existingFiles.images.map((image, index) => (
                   <div key={index} className="relative">
                     <img src={image.url} alt={image.name} className=" h-24 rounded mr-2" />
+                    <p className="text-gray-100 text-sm mt-1">{image.name}</p>
+
                     <button
                       onClick={() => handleFileDelete(index, "images", true)}
                       className="absolute top-1 right-2 bg-rose-700 text-gray-100 text-sm p-1 rounded-full"
@@ -336,24 +345,7 @@ const AdminDashboard = () => {
               </div>
               </div>
             )}
-            {newFiles.images.length > 0 && (
-               <div>
-                 <h3 className="text-gray-100">New files</h3>
-              <div className="mt-2 flex">
-                {newFiles.images.map((image, index) => (
-                  <div key={index} className="relative">
-                    <img src={URL.createObjectURL(image.file)} alt={image.name} className=" h-24 rounded" />
-                    <button
-                      onClick={() => handleFileDelete(index, "images", false)}
-                      className="absolute top-1 right-1 bg-rose-700 text-white p-1 text-sm rounded-full"
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
-              </div>
-              </div>
-            )}
+           
           </div>
           <div className="flex flex-col border border-yellow-500 rounded-md p-4">
             <label className="ml-2 text-gray-100" htmlFor="certs">
@@ -363,27 +355,14 @@ const AdminDashboard = () => {
               type="file"
               multiple
               onChange={(e) => handleFileChange(e, "certs")}
-              className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
+              className=" py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
-            {existingFiles.certs.length > 0 && (
+                        {newFiles.certs.length > 0 && (
               <div className="mt-2">
-                {existingFiles.certs.map((cert, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="text-gray-100">{cert.name}</span>
-                    <button
-                      onClick={() => handleFileDelete(index, "certs", true)}
-                      className="bg-rose-700 text-white p-1 rounded ml-2"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-            {newFiles.certs.length > 0 && (
-              <div className="mt-2">
+                             <h3 className="text-yellow-500">NEW Files</h3>
+
                 {newFiles.certs.map((cert, index) => (
-                  <div key={index} className="flex items-center justify-between">
+                  <div key={index} className="flex items-center justify-between mt-2">
                     <span className="text-gray-100">{cert.name}</span>
                     <button
                       onClick={() => handleFileDelete(index, "certs", false)}
@@ -395,6 +374,38 @@ const AdminDashboard = () => {
                 ))}
               </div>
             )}
+            {existingFiles.certs.length > 0 && (
+              <div className="mt-2">
+               <h3 className="text-gray-100">Existing files</h3>
+                {existingFiles.certs.map((cert, index) => (
+                  <div key={index} className="flex items-center justify-between mt-2">
+                    <span className="text-gray-100">{cert.name}</span>
+                    <button
+                      onClick={() => handleFileDelete(index, "certs", true)}
+                      className="bg-rose-700 text-white p-1 rounded ml-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+          </div>
+          <div className="m-2 rounded-md focus:outline-rose-800 indent-1">
+            <label className="text-gray-100 mr-2 " htmlFor="tags">Tags:</label>
+            {tags.map((tag) => (
+              <label className="text-gray-100 mr-2 flex" key={tag.name}>
+                <input
+                  type="checkbox"
+                  name={tag.name}
+                  checked={form.tags.includes(tag.name)}
+                  onChange={handleTagCheckboxChange}
+                  className="mr-2 accent-rose-800 cursor-pointer "
+                />
+                {tag.name}
+              </label>
+            ))}
           </div>
         </div>
         <div className="mt-4">
@@ -402,13 +413,13 @@ const AdminDashboard = () => {
             <>
               <button
                 onClick={handleUpdateDog}
-                className="bg-yellow-500 text-white p-2 rounded"
+                className="bg-yellow-400 text-gray-700 p-2 rounded hover:bg-yellow-500 active:bg-yellow-600 active:shadow-none shadow-md shadow-black"
               >
                 Update Dog
               </button>
               <button
                 onClick={resetForm}
-                className="bg-rose-700 text-white p-2 rounded ml-2"
+                className="bg-rose-700 text-white p-2 rounded ml-2 hover:bg-rose-800 active:bg-rose-900 active:shadow-none shadow-md shadow-black"
               >
                 Cancel
               </button>
@@ -429,7 +440,7 @@ const AdminDashboard = () => {
 
       <div>
         <h2 className="text-2xl text-gray-800 font-semibold mb-4">Dogs List</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {dogs.map((dog) => (
             <DashDogCard
               key={dog.id}
