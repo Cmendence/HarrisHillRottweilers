@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
-import { useData } from "../../components/useData.jsx"; // Import the DataContext
+import { useEffect } from "react";
+import { useData } from "../../components/useData.jsx";
 import DogCard from "../DogCard";
 
 export default function Females({ handleDogClick }) {
   const { data: dogs, loading, fetchData } = useData(); // Access the data, loading state, and fetch function from the context
 
   useEffect(() => {
-    fetchData(); // Fetch the data when the component mounts
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
-
-  console.log("Females component data:", dogs); // Log the data to check if it's received
+    fetchData();
+  }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading state while data is being fetched
+    return <div className="font-semibold text-2xl m-10">Loading...</div>;
   }
 
   const maleDogs = dogs.filter((dog) => dog.tags.includes("Male"));

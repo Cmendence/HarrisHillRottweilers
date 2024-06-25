@@ -1,14 +1,12 @@
 import React from "react";
-import { useData } from "../../components/useData.jsx"; // Import the DataContext
+import { useData } from "../../components/useData.jsx";
 import DogCard from "../DogCard";
 
 export default function Males({ handleDogClick }) {
   const { data: dogs, loading } = useData(); // Access the data and loading state from the context
 
-  console.log("Puppies component data:", dogs); // Log the data to check if it's received
-
   if (loading) {
-    return <div>Loading...</div>; // Show a loading state while data is being fetched
+    return <div className="font-semibold text-2xl m-10">Loading...</div>;
   }
 
   const puppies = dogs.filter((dog) => dog.tags.includes("Puppy"));

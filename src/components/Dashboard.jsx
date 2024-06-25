@@ -1,7 +1,14 @@
-
 import { useState, useEffect } from "react";
 import { db, storage } from "../firebase.js";
-import { collection, addDoc, updateDoc, getDocs, doc, getDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  getDocs,
+  doc,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { calculateAge } from "../components/utils/ageCalc.jsx";
 import DashDogCard from "./DashDogCard.jsx";
@@ -27,7 +34,10 @@ const AdminDashboard = () => {
   const [currentDogId, setCurrentDogId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [deleteConfirmation, setDeleteConfirmation] = useState({ show: false, dogId: null });
+  const [deleteConfirmation, setDeleteConfirmation] = useState({
+    show: false,
+    dogId: null,
+  });
   const [dogBeingEdited, setDogBeingEdited] = useState(null);
 
   const tags = [
@@ -42,7 +52,10 @@ const AdminDashboard = () => {
     const fetchDogs = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "dogs"));
-        const dogsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const dogsList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
         setDogs(dogsList);
         console.log("Fetched dogs:", dogsList);
       } catch (error) {
@@ -63,13 +76,13 @@ const AdminDashboard = () => {
     if (checked) {
       setForm({ ...form, tags: [...form.tags, name] });
     } else {
-      setForm({ ...form, tags: form.tags.filter(tag => tag !== name) });
+      setForm({ ...form, tags: form.tags.filter((tag) => tag !== name) });
     }
   };
 
   const handleFileChange = (e, key) => {
     const files = Array.from(e.target.files);
-    const filesWithNames = files.map(file => ({ file, name: file.name }));
+    const filesWithNames = files.map((file) => ({ file, name: file.name }));
     setNewFiles({ ...newFiles, [key]: [...newFiles[key], ...filesWithNames] });
   };
 
@@ -100,7 +113,10 @@ const AdminDashboard = () => {
 
     const newDog = {
       ...form,
-      images: images.map((url, idx) => ({ name: newFiles.images[idx].name, url })),
+      images: images.map((url, idx) => ({
+        name: newFiles.images[idx].name,
+        url,
+      })),
       certs: certs.map((url, idx) => ({ name: newFiles.certs[idx].name, url })),
     };
 
@@ -155,17 +171,39 @@ const AdminDashboard = () => {
     }
 
     try {
-      const newImages = await uploadFiles(newFiles.images, `dogs/${currentDogId}/images`);
-      const newCerts = await uploadFiles(newFiles.certs, `dogs/${currentDogId}/certs`);
+      const newImages = await uploadFiles(
+        newFiles.images,
+        `dogs/${currentDogId}/images`
+      );
+      const newCerts = await uploadFiles(
+        newFiles.certs,
+        `dogs/${currentDogId}/certs`
+      );
 
       const updatedDog = {
         ...form,
-        images: [...existingFiles.images, ...newImages.map((url, idx) => ({ name: newFiles.images[idx].name, url }))],
-        certs: [...existingFiles.certs, ...newCerts.map((url, idx) => ({ name: newFiles.certs[idx].name, url }))],
+        images: [
+          ...existingFiles.images,
+          ...newImages.map((url, idx) => ({
+            name: newFiles.images[idx].name,
+            url,
+          })),
+        ],
+        certs: [
+          ...existingFiles.certs,
+          ...newCerts.map((url, idx) => ({
+            name: newFiles.certs[idx].name,
+            url,
+          })),
+        ],
       };
 
       await updateDoc(dogDocRef, updatedDog);
-      setDogs(dogs.map((dog) => (dog.id === currentDogId ? { ...dog, ...updatedDog } : dog)));
+      setDogs(
+        dogs.map((dog) =>
+          dog.id === currentDogId ? { ...dog, ...updatedDog } : dog
+        )
+      );
       console.log("Dog updated successfully:", updatedDog);
       setSuccessMessage("Dog successfully updated!");
       setShowSuccessMessage(true);
@@ -294,29 +332,32 @@ const AdminDashboard = () => {
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4"
             />
           </div>
-        
+
           <div className="flex flex-col border border-yellow-500 rounded-md p-4">
             <label className="ml-3 text-gray-100" htmlFor="images">
               Images
             </label>
             {newFiles.images.length > 0 && (
-               <div>
-                 <h3 className="text-yellow-500">NEW Files</h3>
-              <div className="mt-2 flex">
-                {newFiles.images.map((image, index) => (
-                  
-                  <div key={index} className="relative mr-2">
-                    <img src={URL.createObjectURL(image.file)} alt={image.name} className=" h-24 rounded" />
-                    <p className="text-gray-100 text-sm mt-1">{image.name}</p>
-                    <button
-                      onClick={() => handleFileDelete(index, "images", false)}
-                      className="absolute top-1 right-1 bg-rose-700 text-white p-1 text-sm rounded-full"
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <div>
+                <h3 className="text-yellow-500">NEW Files</h3>
+                <div className="mt-2 flex">
+                  {newFiles.images.map((image, index) => (
+                    <div key={index} className="relative mr-2">
+                      <img
+                        src={URL.createObjectURL(image.file)}
+                        alt={image.name}
+                        className=" h-24 rounded"
+                      />
+                      <p className="text-gray-100 text-sm mt-1">{image.name}</p>
+                      <button
+                        onClick={() => handleFileDelete(index, "images", false)}
+                        className="absolute top-1 right-1 bg-rose-700 text-white p-1 text-sm rounded-full"
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             <input
@@ -326,26 +367,31 @@ const AdminDashboard = () => {
               className="m-2 py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
             {existingFiles.images.length > 0 && (
-               <div>
-                 <h3 className="text-gray-100">Existing files</h3>
-               <div className="mt-2 flex ">
-                {existingFiles.images.map((image, index) => (
-                  <div key={index} className="relative">
-                    <img src={image.url} alt={image.name} className=" h-24 rounded mr-2" />
-                    <p className="text-gray-100 text-sm mt-1">{image.name}</p>
+              <div>
+                <h3 className="text-gray-100">-Existing files-</h3>
+                <div className="mt-2 flex ">
+                  {existingFiles.images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={image.url}
+                        alt={image.name}
+                        className=" lg:h-24 h-12 rounded mr-2"
+                      />
+                      <p className="text-gray-100 lg:text-sm text-xs mt-1">
+                        {image.name}
+                      </p>
 
-                    <button
-                      onClick={() => handleFileDelete(index, "images", true)}
-                      className="absolute top-1 right-2 bg-rose-700 text-gray-100 text-sm p-1 rounded-full"
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
-              </div>
+                      <button
+                        onClick={() => handleFileDelete(index, "images", true)}
+                        className="absolute top-1 right-2 bg-rose-700 text-gray-100 text-sm p-1 rounded-full"
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
-           
           </div>
           <div className="flex flex-col border border-yellow-500 rounded-md p-4">
             <label className="ml-2 text-gray-100" htmlFor="certs">
@@ -357,12 +403,15 @@ const AdminDashboard = () => {
               onChange={(e) => handleFileChange(e, "certs")}
               className=" py-2 rounded-md focus:outline-rose-800 indent-2 pr-4 text-gray-100 cursor-pointer"
             />
-                        {newFiles.certs.length > 0 && (
+            {newFiles.certs.length > 0 && (
               <div className="mt-2">
-                             <h3 className="text-yellow-500">NEW Files</h3>
+                <h3 className="text-yellow-500">NEW Files</h3>
 
                 {newFiles.certs.map((cert, index) => (
-                  <div key={index} className="flex items-center justify-between mt-2">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between mt-2"
+                  >
                     <span className="text-gray-100">{cert.name}</span>
                     <button
                       onClick={() => handleFileDelete(index, "certs", false)}
@@ -376,10 +425,15 @@ const AdminDashboard = () => {
             )}
             {existingFiles.certs.length > 0 && (
               <div className="mt-2">
-               <h3 className="text-gray-100">Existing files</h3>
+                <h3 className="text-gray-100">-Existing files-</h3>
                 {existingFiles.certs.map((cert, index) => (
-                  <div key={index} className="flex items-center justify-between mt-2">
-                    <span className="text-gray-100">{cert.name}</span>
+                  <div
+                    key={index}
+                    className="flex items-center justify-between mt-2"
+                  >
+                    <span className="text-gray-100 lg:text-base text-sm">
+                      {cert.name}
+                    </span>
                     <button
                       onClick={() => handleFileDelete(index, "certs", true)}
                       className="bg-rose-700 text-white p-1 rounded ml-2"
@@ -390,10 +444,11 @@ const AdminDashboard = () => {
                 ))}
               </div>
             )}
-
           </div>
           <div className="m-2 rounded-md focus:outline-rose-800 indent-1">
-            <label className="text-gray-100 mr-2 " htmlFor="tags">Tags:</label>
+            <label className="text-gray-100 mr-2 " htmlFor="tags">
+              Tags:
+            </label>
             {tags.map((tag) => (
               <label className="text-gray-100 mr-2 flex" key={tag.name}>
                 <input
@@ -433,7 +488,9 @@ const AdminDashboard = () => {
             </button>
           )}
           {showSuccessMessage && (
-            <span className="ml-4 text-green-400 font-semibold">{successMessage}</span>
+            <span className="ml-4 text-green-400 font-semibold">
+              {successMessage}
+            </span>
           )}
         </div>
       </div>
