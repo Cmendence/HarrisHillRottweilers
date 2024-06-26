@@ -1,4 +1,3 @@
-
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -26,10 +25,7 @@ function classNames(...classes) {
 
 // Update the Navbar component
 export default function Navbar() {
-  // Change props to user, login, and logout
-
-
-const {user, logout, isAuthorized} = useAuth();
+  const { user, logout, isAuthorized } = useAuth();
 
   return (
     <Disclosure as="nav" className="bg-gray-950">
@@ -81,7 +77,7 @@ const {user, logout, isAuthorized} = useAuth();
                 </div>
               </div>
               {/* Conditionally render based on whether the user is logged in */}
-              {user && isAuthorized? (
+              {user && isAuthorized ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
@@ -118,7 +114,7 @@ const {user, logout, isAuthorized} = useAuth();
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="/dashboard"
+                              to="/admin/dashboard"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -160,10 +156,8 @@ const {user, logout, isAuthorized} = useAuth();
                   </Menu>
                 </div>
               ) : (
-               
                 <Link
-                  to='/login'
-                  onClick={logout}
+                  to="/login"
                   className="hover:text-yellow-400 active:text-yellow-600 text-xs text-gray-300 font-semibold absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
                 >
                   Admin
@@ -178,7 +172,6 @@ const {user, logout, isAuthorized} = useAuth();
                 <Link
                   key={item.name}
                   to={item.href}
-                  href={item.href}
                   onClick={() => {
                     close();
                   }}

@@ -12,6 +12,8 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { calculateAge } from "../components/utils/ageCalc.jsx";
 import DashDogCard from "./DashDogCard.jsx";
+import { useNavigate } from "react-router-dom";
+import AdminTabs from "./AdminTabs.jsx";
 
 const AdminDashboard = () => {
   const [dogs, setDogs] = useState([]);
@@ -47,6 +49,8 @@ const AdminDashboard = () => {
     { name: "Reserved" },
     { name: "Puppy" },
   ];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDogs = async () => {
@@ -275,7 +279,9 @@ const AdminDashboard = () => {
         Admin Dashboard
       </h1>
 
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg shadow-gray-600 mb-8">
+      <AdminTabs />
+
+      <div className="bg-gray-800 p-6 rounded-tl-none rounded-lg shadow-lg shadow-gray-600 mb-8">
         <h2 className="text-2xl text-gray-100 font-semibold mb-4">
           {isEditing ? `Editing ${dogBeingEdited}` : "Add Dog"}
         </h2>

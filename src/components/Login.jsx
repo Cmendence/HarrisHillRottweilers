@@ -10,7 +10,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user && isAuthorized) {
-      navigate("/dashboard"); // Navigate to dashboard if authorized
+      navigate("/admin/dashboard"); // Navigate to dashboard if authorized
     } else if (user && !isAuthorized) {
       navigate("/unauth"); // Navigate to UnAuth if not authorized
     }

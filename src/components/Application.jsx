@@ -6,10 +6,10 @@ import { useData } from "../components/useData.jsx";
 export default function Application() {
   const [selectedDogObj, setSelectedDogObj] = useState(null);
   const [showPopover, setShowPopover] = useState(false);
-  const { data: dogs, fetchData } = useData(); // Access the data, loading state, and fetch function from the context
+  const { dogsData, setDogsData, fetchData } = useData(); // Access the data, loading state, and fetch function from the context
 
   useEffect(() => {
-    fetchData(); // Fetch the data when the component mounts
+    fetchData("dogs", setDogsData); // Fetch the data when the component mounts
   }, []);
 
   const isMaleOrFemale = (dog) => {
@@ -21,7 +21,7 @@ export default function Application() {
   };
 
   const filterDogs = () => {
-    return dogs.filter((dog) => dog.tags.includes("Available"));
+    return dogsData ? dogsData.filter((dog) => dog.tags.includes("Available")) : [];
   };
 
   const handleSelectChange = (e) => {
@@ -57,8 +57,8 @@ export default function Application() {
         Application for companionship
       </h1>
       <p className="text-lg font-semibold text-center">
-        If you're here, you must have found your next furry family member!
-        Drop us a line and we'll be in touch soon.
+        If you&apos;re here, you must have found your next furry family member!
+        Drop us a line and we&apos;ll be in touch soon.
       </p>
       <div className=" flex justify-center lg-m-4">
         <form className=" bg-gray-800 lg:p-8 py-4 px-2 rounded-md m-10 lg:w-1/2 font-semibold shadow-lg shadow-gray-600">
@@ -180,9 +180,6 @@ export default function Application() {
           <div className=" flex justify-center ">
             <div className=" flex items-center justify-between">
               <div className="flex w-1/2 mt-4">
-                {/* <label htmlFor="dogSelect" className="text-gray-300 mr-2 my-1">
-                  Name
-                </label> */}
                 <select
                   id="dogSelect"
                   value={selectedDogObj ? selectedDogObj.name : ""}
@@ -206,7 +203,7 @@ export default function Application() {
             </div>
           </div>
           <div className="flex items-center flex-col">
-            {selectedDogObj && (
+            {selectedDogObj && selectedDogObj.images && selectedDogObj.images.length > 0 && (
               <img
                 src={selectedDogObj.images[0].url}
                 alt={selectedDogObj.name}
