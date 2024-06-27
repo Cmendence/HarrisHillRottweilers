@@ -16,7 +16,7 @@ export default function DashDogCard({
       key={dog.id}
       className="bg-gray-800 p-4 rounded-lg shadow-lg shadow-gray-700"
     >
-      <h3 className="text-lg font-bold text-gray-100 mb-1">{dog.name}</h3>
+      <h3 className="text-lg font-semibold text-gray-100 mb-1">{dog.name}</h3>
 
       <div className="grid grid-cols-2 gap-3">
         {dog.images.map((image, index) => (
@@ -36,14 +36,14 @@ export default function DashDogCard({
             <p>Mother: {dog.mother}</p>
             <p>Father: {dog.father}</p>
             <p>Birthdate: {dog.birthdate}</p>
-            <p className="text-yellow-500">
-              Tags:{" "}
+            <div className="text-yellow-500 flex flex-col">
+              <p>Tags: </p>
               {dog.tags.map((tag) => (
-                <p key={tag} className="text-gray-300">
+                <span key={tag} className="text-gray-300">
                   -{tag}
-                </p>
+                </span>
               ))}
-            </p>
+            </div>
           </div>
         </div>
         <p className="text-yellow-500">Certs:</p>
