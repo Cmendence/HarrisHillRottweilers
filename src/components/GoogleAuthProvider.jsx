@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-const approvedEmails = ["chris.mendence@gmail.com", "menuhki@gmail.com"]; // List of approved emails
+const approvedEmails = ["chris.mendence@gmail.com", "menuhki@gmail.com", "klblackwell15@gmail.com"]; // List of approved emails
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
