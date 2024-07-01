@@ -56,27 +56,23 @@ export default function Gallery() {
   console.log(galleryData);
 
   return (
-    <div>
+    <div className="mb-4">
       <h1 className="text-4xl text-gray-800 font-semibold text-center mt-4">
         Gallery
       </h1>
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-4 mt-4 justify-center">
         {galleryData.map((item) => (
-          <div key={item.id} className="m-4 p-2 rounded-lg shadow-md shadow-black bg-neutral-300 border border-yellow-500 flex flex-col items-center w-52">
+          <div key={item.id} className="rounded-lg flex flex-col items-center lg:w-52 w-36">
             {item.images && item.images.length > 0 && (
               <div className="flex flex-col items-center">
                 {item.images.map((image, index) => (
-                  <div key={index} className="p-2">
-                    <img src={image.url} alt={image.name} className="w-48 rounded-md" />
+                  <div key={index} className="border border-yellow-500 rounded-md">
+                    <img src={image.url} alt={image.name} className="rounded-md" />
                   </div>
                 ))}
               </div>
             )}
-            {/* <p className="mt-2 font-semibold text-gray-900 capitalize text-sm text-center">
-              {item.description}
-            </p> */}
-
-            <CollapsibleText text={item.description} maxLength={75} />
+            {item.description && <CollapsibleText text={item.description} maxLength={75} />}
           </div>
         ))}
       </div>
