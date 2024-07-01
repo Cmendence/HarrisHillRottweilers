@@ -1,36 +1,4 @@
 
-// import { useNavigate } from "react-router-dom";
-
-// export default function AdminTabs() {
-
-// const navigate = useNavigate();
-
-//    return(
-//       <div className="flex gap-2">
-//       <button
-//         onClick={() => navigate("/dashboard")}
-//         className="bg-gray-800 rounded-t lg:px-4 px-2 lg:py-1.5 hover:bg-gray-900 text-slate-100 font-semibold  lg:text-lg text-xs lg:tracking-wide"
-//       >
-//         Edit Dogs
-//       </button>
-
-//       <button
-//         onClick={() => navigate("/dashboard/editGallery")}
-//         className="bg-gray-800 rounded-t lg:px-4 px-2 lg:py-1.5 hover:bg-gray-900 text-slate-100 font-semibold  lg:text-lg text-xs lg:tracking-wide"
-//       >
-//         Edit Gallery
-//       </button>
-
-//       <button
-//         onClick={() => navigate("/dashboard/editPastLitters")}
-//         className="bg-gray-800 rounded-t lg:px-4 px-2 py-1.5 hover:bg-gray-900 text-slate-100 font-semibold  lg:text-lg text-xs lg:tracking-wide"
-//       >
-//         Edit Past Litters
-//       </button>
-//     </div>
-//    )
-// }
-
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 

@@ -4,7 +4,6 @@ import SadDog from '../../assets/images/UnAuthDog.jpg'
 
 export default function UnAuth() {
 
-
    const navigate = useNavigate();
 
    return (

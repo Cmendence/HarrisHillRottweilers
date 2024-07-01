@@ -2,7 +2,7 @@
 
 
 import { useEffect } from "react";
-import { useData } from "../../components/useData.jsx";
+import { useData } from "../../components/utils/useData";
 import DogCard from "../DogCard";
 
 export default function Females({ handleDogClick }) {

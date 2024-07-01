@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useData } from "../../components/useData.jsx";
+import { useData } from "../../components/utils/useData.jsx";
 
 export default function PastLitters() {
   const { pastLittersData, setPastLittersData, loading, fetchData } = useData(); // Access the data, loading state, and fetch function from the context
@@ -16,21 +16,21 @@ export default function PastLitters() {
 
   return (
     <div>
-      <h1 className="text-4xl text-purple-800 underline font-extrabold text-center">
-        THIS IS THE PAST LITTERS PAGE
+     <h1 className="text-4xl text-gray-800 font-semibold text-center mt-4">
+        Past Litters
       </h1>
       {pastLittersData.map((item) => (
-        <div key={item.id} className="m-4 p-4 border rounded-lg shadow-lg">
+        <div key={item.id} className="m-4 p-4">
           {item.images && item.images.length > 0 && (
             <div className="flex flex-wrap gap-4">
               {item.images.map((image, index) => (
-                <div key={index} className="w-48 h-48">
-                  <img src={image.url} alt={image.name} className="object-cover w-full h-full rounded" />
+                <div key={index} className="h-full">
+                  <img src={image.url} alt={image.name} className="object-cover w-full h-full rounded-md shadow-md shadow-black" />
                 </div>
               ))}
             </div>
           )}
-          <p className="mt-2">{item.description}</p>
+          <p className="mt-2 font-semibold text-gray-900 capitalize text-sm">{item.description}</p>
         </div>
       ))}
     </div>

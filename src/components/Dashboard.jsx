@@ -12,7 +12,6 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { calculateAge } from "../components/utils/ageCalc.jsx";
 import DashDogCard from "./DashDogCard.jsx";
-import { useNavigate } from "react-router-dom";
 import AdminTabs from "./AdminTabs.jsx";
 
 const AdminDashboard = () => {
@@ -49,8 +48,6 @@ const AdminDashboard = () => {
     { name: "Reserved" },
     { name: "Puppy" },
   ];
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDogs = async () => {

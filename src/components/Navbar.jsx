@@ -3,8 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import ProfilePic from "../assets/images/dog3.jpg";
-import { useAuth } from "./GoogleAuthProvider";
+import { useAuth } from "./utils/GoogleAuthProvider";
 
 // Define the navigation links
 const navigation = [
@@ -79,14 +78,14 @@ export default function Navbar() {
               {/* Conditionally render based on whether the user is logged in */}
               {user && isAuthorized ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
+                  {/* <button
                     type="button"
                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
@@ -110,14 +109,14 @@ export default function Navbar() {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-300 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
                             <Link
                               to="/admin/dashboard"
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-yellow-500" : "",
+                                "block px-4 py-2 text-sm font-semibold text-gray-700"
                               )}
                             >
                               Dashboard
@@ -129,8 +128,8 @@ export default function Navbar() {
                             <Link
                               href="#"
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-yellow-500" : "",
+                                "block px-4 py-2 text-sm font-semibold text-gray-700"
                               )}
                             >
                               Settings
@@ -143,8 +142,8 @@ export default function Navbar() {
                               to={'/'}
                               onClick={logout} // Call the logout function when clicked
                               className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                active ? "bg-yellow-500" : "",
+                                "block px-4 py-2 text-sm font-semibold text-gray-700"
                               )}
                             >
                               Sign out
