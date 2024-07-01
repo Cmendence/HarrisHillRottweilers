@@ -49,6 +49,7 @@ export default function DogDetails() {
           />
           {isReserved && <ReservedBanner />}
         </div>
+        { selectedDog.images.length > 1 &&
         <div className="flex justify-center flex-wrap">
           {selectedDog.images.map((image, index) => (
             <img
@@ -60,6 +61,7 @@ export default function DogDetails() {
             />
           ))}
         </div>
+}
         {selectedDog.tags.includes("Available") && (
           <div className=" text-center my-4">
             <Link to="/application">
