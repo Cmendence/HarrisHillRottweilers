@@ -24,7 +24,7 @@ export default function DashDogCard({
             key={index}
             src={image.url}
             alt={dog.name}
-            className=" h-36 rounded"
+            className=" lg:w-48 rounded"
           />
         ))}
       </div>
