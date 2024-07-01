@@ -1,9 +1,7 @@
-
-
 import { createContext, useContext, useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
-import { db, storage } from "../../firebase.js"
+import { db, storage } from "../../firebase.js";
 
 const DataContext = createContext();
 
@@ -21,12 +19,15 @@ export const DataProvider = ({ children }) => {
     setLoading(true);
     try {
       const querySnapshot = await getDocs(collection(db, collectionName));
-      console.log(`Firestore data fetched from ${collectionName}:`, querySnapshot.docs);
-      
+      console.log(
+        `Firestore data fetched from ${collectionName}:`,
+        querySnapshot.docs
+      );
+
       const dataPromises = querySnapshot.docs.map(async (doc) => {
         const docData = doc.data();
         console.log("Document data:", docData);
-        
+
         // If there are images, get their URLs
         if (docData.images && docData.images.length > 0) {
           const imagePromises = docData.images.map(async (image) => {
@@ -56,7 +57,18 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ dogsData, setDogsData, galleryData, setGalleryData, pastLittersData, setPastLittersData, loading, fetchData }}>
+    <DataContext.Provider
+      value={{
+        dogsData,
+        setDogsData,
+        galleryData,
+        setGalleryData,
+        pastLittersData,
+        setPastLittersData,
+        loading,
+        fetchData,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );

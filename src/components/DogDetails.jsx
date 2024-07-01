@@ -49,19 +49,19 @@ export default function DogDetails() {
           />
           {isReserved && <ReservedBanner />}
         </div>
-        { selectedDog.images.length > 1 &&
-        <div className="flex justify-center flex-wrap">
-          {selectedDog.images.map((image, index) => (
-            <img
-              key={image.url}
-              src={image.url}
-              className="lg:h-24 h-16 rounded-md m-2 shadow-md shadow-gray-800 cursor-pointer"
-              alt={image.name}
-              onClick={() => toggleEnlargeDog(index)}
-            />
-          ))}
-        </div>
-}
+        {selectedDog.images.length > 1 && (
+          <div className="flex justify-center flex-wrap">
+            {selectedDog.images.map((image, index) => (
+              <img
+                key={image.url}
+                src={image.url}
+                className="lg:h-24 h-16 rounded-md m-2 shadow-md shadow-gray-800 cursor-pointer"
+                alt={image.name}
+                onClick={() => toggleEnlargeDog(index)}
+              />
+            ))}
+          </div>
+        )}
         {selectedDog.tags.includes("Available") && (
           <div className=" text-center my-4">
             <Link to="/application">

@@ -1,4 +1,3 @@
-
 // import { useEffect } from "react";
 // import { useData } from "../../components/useData.jsx";
 // import DogCard from "../DogCard";
@@ -35,7 +34,6 @@
 //   );
 // }
 
-
 import { useEffect } from "react";
 import { useData } from "../../components/utils/useData.jsx";
 import DogCard from "../DogCard";
@@ -51,7 +49,10 @@ export default function Females({ handleDogClick }) {
     return <div className="font-semibold text-2xl m-10">Loading...</div>;
   }
 
-  const maleDogs = dogsData && dogsData.length > 0 ? dogsData.filter((dog) => dog.tags.includes("Male")) : [];
+  const maleDogs =
+    dogsData && dogsData.length > 0
+      ? dogsData.filter((dog) => dog.tags.includes("Male"))
+      : [];
 
   return (
     <div>

@@ -139,7 +139,7 @@ export default function Navbar() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to={'/'}
+                              to={"/"}
                               onClick={logout} // Call the logout function when clicked
                               className={classNames(
                                 active ? "bg-yellow-500" : "",

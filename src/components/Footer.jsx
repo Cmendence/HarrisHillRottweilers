@@ -6,7 +6,6 @@ import iconIG from "../assets/icons/icons8-insta-50.png";
 import iconTT from "../assets/icons/icons8-tiktok-50.png";
 import iconGD from "../assets/icons/goodDog.png";
 
-
 export default function Footer() {
   return (
     <footer className="w-full bg-gray-950 p-4 font-semibold">
@@ -57,7 +56,6 @@ export default function Footer() {
             <Typography
               as="a"
               href="/"
-              
               className=" transition-colors hover:text-yellow-400 active:text-yellow-600"
             >
               Home
@@ -76,7 +74,6 @@ export default function Footer() {
             <Typography
               as="a"
               href="#"
-              
               className=" transition-colors hover:text-yellow-400 active:text-yellow-600"
             >
               License
@@ -87,7 +84,6 @@ export default function Footer() {
             <Typography
               as="a"
               href="/contact"
-             
               className="transition-colors hover:text-yellow-400 active:text-yellow-600"
             >
               Contact Us

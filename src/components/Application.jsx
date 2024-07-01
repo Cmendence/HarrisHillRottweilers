@@ -21,12 +21,16 @@ export default function Application() {
   };
 
   const filterDogs = () => {
-    return dogsData ? dogsData.filter((dog) => dog.tags.includes("Available")) : [];
+    return dogsData
+      ? dogsData.filter((dog) => dog.tags.includes("Available"))
+      : [];
   };
 
   const handleSelectChange = (e) => {
     const selectedDogName = e.target.value;
-    const selectedDog = filteredDogs.find((dog) => dog.name === selectedDogName);
+    const selectedDog = filteredDogs.find(
+      (dog) => dog.name === selectedDogName
+    );
     setSelectedDogObj(selectedDog);
   };
 
@@ -203,13 +207,15 @@ export default function Application() {
             </div>
           </div>
           <div className="flex items-center flex-col">
-            {selectedDogObj && selectedDogObj.images && selectedDogObj.images.length > 0 && (
-              <img
-                src={selectedDogObj.images[0].url}
-                alt={selectedDogObj.name}
-                className="mt-4 rounded-lg lg:w-48 w-32 shadow-lg shadow-black"
-              />
-            )}
+            {selectedDogObj &&
+              selectedDogObj.images &&
+              selectedDogObj.images.length > 0 && (
+                <img
+                  src={selectedDogObj.images[0].url}
+                  alt={selectedDogObj.name}
+                  className="mt-4 rounded-lg lg:w-48 w-32 shadow-lg shadow-black"
+                />
+              )}
             <button
               onClick={togglePopover}
               className="bg-rose-900 rounded border-4 border-rose-900 hover:bg-rose-950 hover:border-rose-950 active:shadow-sm text-slate-100 font-semibold shadow-md shadow-black m-4 w-28 h-10"

@@ -1,15 +1,12 @@
-
-
-
 import { createContext, useContext, useState, useEffect } from "react";
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
-import { auth } from "../../firebase.js"
+import { auth } from "../../firebase.js";
 import {
   onAuthStateChanged,
   signInWithCredential,
   GoogleAuthProvider as FirebaseGoogleAuthProvider,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -45,7 +42,10 @@ export const AuthProvider = ({ children }) => {
       // Set persistence
       await setPersistence(auth, browserLocalPersistence);
 
-      const credential = FirebaseGoogleAuthProvider.credential(null, response.access_token);
+      const credential = FirebaseGoogleAuthProvider.credential(
+        null,
+        response.access_token
+      );
       await signInWithCredential(auth, credential);
       const profile = await fetchUserProfile(response.access_token);
       if (profile && approvedEmails.includes(profile.email)) {

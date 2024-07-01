@@ -37,7 +37,6 @@
 //   );
 // }
 
-
 import { useEffect } from "react";
 import { useData } from "../../components/utils/useData.jsx";
 import CollapsibleText from "../utils/CollapsibleText.jsx";
@@ -62,17 +61,29 @@ export default function Gallery() {
       </h1>
       <div className="flex flex-wrap gap-4 mt-4 justify-center">
         {galleryData.map((item) => (
-          <div key={item.id} className="rounded-lg flex flex-col items-center lg:w-52 w-36">
+          <div
+            key={item.id}
+            className="rounded-lg flex flex-col items-center lg:w-52 w-36"
+          >
             {item.images && item.images.length > 0 && (
               <div className="flex flex-col items-center">
                 {item.images.map((image, index) => (
-                  <div key={index} className="border border-yellow-500 rounded-md">
-                    <img src={image.url} alt={image.name} className="rounded-md" />
+                  <div
+                    key={index}
+                    className="border border-yellow-500 rounded-md"
+                  >
+                    <img
+                      src={image.url}
+                      alt={image.name}
+                      className="rounded-md"
+                    />
                   </div>
                 ))}
               </div>
             )}
-            {item.description && <CollapsibleText text={item.description} maxLength={75} />}
+            {item.description && (
+              <CollapsibleText text={item.description} maxLength={75} />
+            )}
           </div>
         ))}
       </div>

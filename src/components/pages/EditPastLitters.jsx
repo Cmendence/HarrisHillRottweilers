@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { db, storage } from "../../firebase.js";
-import { collection, addDoc, updateDoc, getDocs, doc, deleteDoc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  getDoc,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AdminTabs from "../AdminTabs.jsx";
 
@@ -118,7 +126,10 @@ const EditPastLitters = () => {
     const photoDocSnapshot = await getDoc(photoDocRef);
 
     if (!photoDocSnapshot.exists()) {
-      console.error("No document found for the given photo ID:", currentPhotoId);
+      console.error(
+        "No document found for the given photo ID:",
+        currentPhotoId
+      );
       return;
     }
 
@@ -304,14 +315,21 @@ const EditPastLitters = () => {
       </div>
 
       <div>
-        <h2 className="text-2xl text-gray-800 font-semibold mb-4">Past Litters</h2>
+        <h2 className="text-2xl text-gray-800 font-semibold mb-4">
+          Past Litters
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {photos.map((photo) => (
-            <div key={photo.id} className="relative bg-gray-800 px-4 pt-9 pb-4 rounded-lg">
+            <div
+              key={photo.id}
+              className="relative bg-gray-800 px-4 pt-9 pb-4 rounded-lg"
+            >
               <div className="mt-1 flex">
                 {photo.images.map((image, idx) => (
-                   <div key={idx} className="relative mr-2">
-                      <p className="text-gray-100 text-xs font-normal mt-1 mb-2">{image.name}</p>
+                  <div key={idx} className="relative mr-2">
+                    <p className="text-gray-100 text-xs font-normal mt-1 mb-2">
+                      {image.name}
+                    </p>
                     <img
                       src={image.url}
                       alt={image.name}
@@ -320,7 +338,9 @@ const EditPastLitters = () => {
                   </div>
                 ))}
               </div>
-                <div className="text-gray-100 font-normal text-xs mt-2">{photo.description}</div>
+              <div className="text-gray-100 font-normal text-xs mt-2">
+                {photo.description}
+              </div>
               <button
                 onClick={() => handleEditPhoto(photo.id)}
                 className="absolute top-2 left-2 bg-yellow-500 text-gray-800 p-1 text-sm rounded"
@@ -341,9 +361,7 @@ const EditPastLitters = () => {
       {deleteConfirmation.show && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
-            <p className="text-gray-300 mb-4 text-center">
-              Delete photo?
-            </p>
+            <p className="text-gray-300 mb-4 text-center">Delete photo?</p>
             <div className="flex justify-end">
               <button
                 onClick={handleDeletePhoto}

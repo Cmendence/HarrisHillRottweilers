@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "./GoogleAuthProvider.jsx";
@@ -22,4 +21,3 @@ const ProtectedRoute = () => {
 };
 
 export default ProtectedRoute;
-

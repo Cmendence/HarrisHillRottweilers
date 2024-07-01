@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CollapsibleText = ({ text, maxLength }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -19,7 +19,7 @@ const CollapsibleText = ({ text, maxLength }) => {
       <p className="text-gray-900">{renderText()}</p>
       {text.length > maxLength && (
         <button onClick={toggleExpansion} className="text-rose-800 mt-1">
-          {isExpanded ? 'See Less' : 'See More'}
+          {isExpanded ? "See Less" : "See More"}
         </button>
       )}
     </div>

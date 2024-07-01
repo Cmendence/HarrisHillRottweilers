@@ -16,7 +16,7 @@ export default function PastLitters() {
 
   return (
     <div>
-     <h1 className="text-4xl text-gray-800 font-semibold text-center mt-4">
+      <h1 className="text-4xl text-gray-800 font-semibold text-center mt-4">
         Past Litters
       </h1>
       {pastLittersData.map((item) => (
@@ -25,7 +25,11 @@ export default function PastLitters() {
             <div className="flex flex-wrap gap-4">
               {item.images.map((image, index) => (
                 <div key={index} className="h-full">
-                  <img src={image.url} alt={image.description? image.description : image.name} className="object-cover w-full h-full rounded-md shadow-md shadow-black" />
+                  <img
+                    src={image.url}
+                    alt={image.description ? image.description : image.name}
+                    className="object-cover w-full h-full rounded-md shadow-md shadow-black"
+                  />
                 </div>
               ))}
             </div>
