@@ -25,12 +25,12 @@ export default function PastLitters() {
             <div className="flex flex-wrap gap-4">
               {item.images.map((image, index) => (
                 <div key={index} className="h-full">
-                  <img src={image.url} alt={image.name} className="object-cover w-full h-full rounded-md shadow-md shadow-black" />
+                  <img src={image.url} alt={image.description} className="object-cover w-full h-full rounded-md shadow-md shadow-black" />
                 </div>
               ))}
             </div>
           )}
-          <p className="mt-2 font-semibold text-gray-900 capitalize text-sm">{item.description}</p>
+          {/* <p className="mt-2 font-semibold text-gray-900 capitalize text-sm">{item.description}</p> */}
         </div>
       ))}
     </div>
