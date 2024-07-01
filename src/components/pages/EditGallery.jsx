@@ -242,7 +242,7 @@ const EditGallery = () => {
                     <img
                       src={image.url}
                       alt={image.name}
-                      className="lg:h-24 h-12 rounded mr-2"
+                      className="lg:h-24 h-20 rounded mr-2"
                     />
                     <p className="text-gray-100 lg:text-sm text-xs mt-1">
                       {image.name}
@@ -290,13 +290,13 @@ const EditGallery = () => {
           ) : (
             <button
               onClick={handleAddPhoto}
-              className="bg-green-700 text-gray-100 shadow-md shadow-black p-2 rounded hover:bg-green-800 active:shadow-none active:bg-green-900"
+              className="bg-green-700 text-gray-100 shadow-md lg:text-base text-sm  shadow-black lg:p-2 py-2 px-1.5 rounded hover:bg-green-800 active:shadow-none active:bg-green-900"
             >
               Add Photo
             </button>
           )}
           {showSuccessMessage && (
-            <span className="ml-4 text-green-400 font-semibold">
+            <span className="ml-4 text-green-400 font-semibold lg:text-base text-xs">
               {successMessage}
             </span>
           )}
@@ -305,7 +305,7 @@ const EditGallery = () => {
 
       <div>
         <h2 className="text-2xl text-gray-800 font-semibold mb-4">Gallery</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {photos.map((photo) => (
             <div key={photo.id} className="relative bg-gray-800 px-4 pt-9 pb-4 rounded-lg">
               <div className=" flex">
