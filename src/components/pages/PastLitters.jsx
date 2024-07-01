@@ -20,7 +20,7 @@ export default function PastLitters() {
         Past Litters
       </h1>
       {pastLittersData.map((item) => (
-        <div key={item.id} className="m-4 p-4">
+        <div key={item.id} className="lg:m-4 p-4">
           {item.images && item.images.length > 0 && (
             <div className="flex flex-wrap gap-4">
               {item.images.map((image, index) => (
